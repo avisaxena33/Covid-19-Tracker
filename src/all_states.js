@@ -1,4 +1,4 @@
-export const all_states = [
+const all_states = [
     {
         "name": "Alabama",
         "abbreviation": "AL"
@@ -236,3 +236,5 @@ export const all_states = [
         "abbreviation": "WY"
     }
 ]
+
+export default all_states;

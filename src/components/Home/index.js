@@ -1,56 +1,66 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import './index.css';
-import { all_states } from "../../all_states.js";
-import Card from 'react-bootstrap/Card';
-import CardDeck from 'react-bootstrap/CardDeck';
-import CardGroup from 'react-bootstrap/CardGroup';
-import Container from "react-bootstrap/Container";
-import Col from "react-bootstrap/Col"
+import Card from '../Card'
 
 const Home = () => {
     const curr_us_url = 'https://api.covidtracking.com/v1/us/current.json';
+    const notIncludedDataPoints = ["date", "lastModified", "hash", "dateChecked"];
+
+    const [response, setResponse] = useState([]);
+    const [rawData, setRawData] = useState({})
+    const [isLoading, setIsLoading] = useState(true);
 
     const fetchCurrentCountryData = async () => {
         const response = await fetch(curr_us_url);
         const results = await response.json();
         let arr_res = [];
         for (const [key, value] of Object.entries(results[0])) {
-            arr_res.push({key, value})
+            if (!notIncludedDataPoints.includes(key)) {
+                let newKey = key.charAt(0).toUpperCase() + key.slice(1);
+                newKey = newKey.split(/(?=[A-Z])/).join(' ');
+                arr_res.push({key:newKey, value})
+            }
         }
         setResponse(arr_res)
+        setRawData(results[0])
+        setIsLoading(false)
     }
 
-    const [response, setResponse] = useState([]);
-    
-    useEffect(() => {
-        fetchCurrentCountryData();
-    }, [])
+    const parseDate = () => {
+        var options = { year: 'numeric', month: 'long', day: 'numeric' };
+        return new Date(rawData.dateChecked).toLocaleDateString([],options);
+    }
 
+    useEffect(() => {
+        setIsLoading(true);
+        fetchCurrentCountryData();
+    }, [response])
+
+    if (isLoading) {
+        return (
+            <>
+                <div className="home">
+                <h1>Loading ...</h1>
+            </div>
+            </>
+        )
+    }
+    
     return (
         <>
-            <h1>US Covid-19 Statistics</h1>
-            <Container>
-                <CardDeck style={{display: 'flex', flexDirection: 'row', justifyContent: 'center'}}>
-                {response.map((data) => {
-                            return (
-                                <Col className="container-fluid mt-4">
-                                    <Card 
-                                    key={data.key}
-                                    bg='danger' 
-                                    border="dark" 
-                                    style={{ width: '18rem' }}
-                                    className="mb-2"
-                                    >
-                                        <Card.Header>{data.key}</Card.Header>
-                                        <Card.Body>
-                                            <Card.Title>{data.value}</Card.Title>
-                                        </Card.Body>
-                                    </Card>
-                                </Col>      
-                            )
-                })}
-                </CardDeck>
-            </Container>
+            <div className="home">
+                <h1>US Covid-19 Statistics As Of:</h1>
+                <h1>{parseDate()}</h1>
+                <div className="card-container">
+                    {response.map((stat, index) => {
+                        return (
+                            <>
+                                <Card key={index} data={stat} />
+                            </>
+                        )
+                    })}
+                </div>
+            </div>
         </>
     )
 }

@@ -5,3 +5,17 @@ body {
   font-family: Arial;
   text-align: center;
 }
+
+.home {
+
+}
+
+.card-container { 
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+}
+
+.home > h1 {
+  padding-top: 30px;
+}

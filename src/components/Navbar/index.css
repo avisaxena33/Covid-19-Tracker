@@ -1,0 +1,35 @@
+.navbar {
+    display: flex;
+    padding: 15px 20px;
+    justify-content: space-between;
+    position: sticky;
+    z-index: 100;
+    box-shadow: white;
+    top: 0;
+    box-shadow: 10px 5px 5px black;
+    background-color: #282c34;
+}
+
+.navbar__left {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.navbar__input {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    margin-left: 10px;
+}
+
+.navbar__select {
+    border-radius:36px;
+}
+
+.navbar-title {
+    color: white;
+}
+
+.navbar-title:hover {
+    color: red;
+}
