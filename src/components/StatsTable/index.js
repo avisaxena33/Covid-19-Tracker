@@ -23,7 +23,11 @@ const StatsTable = ({ countriesData, globalData, title }) => {
               }
             }
         }
-    }
+    };
+
+    const numberWithCommas = (number) => {
+        return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    };
 
     return (
         <>
@@ -68,7 +72,7 @@ const StatsTable = ({ countriesData, globalData, title }) => {
                                             {country.countryInfo && country.countryInfo.flag && <img src={country.countryInfo.flag} className="flag"></img>}
                                             {country.name}
                                         </td>
-                                        <td className="cases__color">{country.cases || country.cases == 0 ? country.cases : 'Unknown'}</td>
+                                        <td className="cases__color">{country.cases || country.cases == 0 ? numberWithCommas(country.cases) : 'Unknown'}</td>
                                         <td className="cases__color">{country.todayCases || country.todayCases == 0  ? country.todayCases : 'Unknown'}</td>
                                         <td className="cases__color">{country.casesPerOneMillion || country.casesPerOneMillion == 0  ? country.casesPerOneMillion : 'Unknown'}</td>
                                         <td className="death__color">{country.deaths || country.deaths == 0 ? country.deaths : 'Unknown'}</td>
