@@ -1,0 +1,90 @@
+h2 {
+  font-weight: bold;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.country__table {
+    border-radius: 25px;
+    background-color: #3d434e;
+    position: relative;
+    margin-top: 25px;
+    padding: 50px 50px;
+    width: 1000px;
+    height: 550px;
+  }
+  
+.country__table__scroll {
+  height: 400px;
+  overflow:auto;  
+  margin-top:20px;
+}
+
+.top {
+  display: flex;
+  justify-content: space-between;
+}
+
+.search {
+  background-color: #3d434e;
+  color: white;
+}
+
+table, th, td {
+  font-size: 14px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+  
+table tr:nth-child(odd) td{
+  background-color: #3d434e;
+}
+
+table tr:nth-child(even) td{
+  background-color: #282c34;
+}
+
+tr td { 
+  text-align: left;
+}
+
+th, td {
+  padding: 5px;
+}
+
+th {
+  text-align: left;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background-color: red;
+}
+
+td {
+  font-weight: bold;
+}
+
+.flag {
+  border: 1px solid black;
+  border-radius: 4px;
+  margin-right: 20px;
+  width: 30px;
+}
+
+.death__color {
+  color: red;
+}
+
+.cases__color {
+  color: lightseagreen;
+}
+
+.critical__color {
+    color: orange;
+}
+
+.active__color {
+    color: yellow;
+}
+
+.recovered__color {
+    color: turquoise;
+}

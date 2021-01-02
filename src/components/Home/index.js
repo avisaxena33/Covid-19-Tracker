@@ -1,40 +1,86 @@
 import React, { useState, useEffect } from 'react';
 import './index.css';
-import Card from '../Card'
+import StatsTable from '../StatsTable';
+import TotalSidebar from '../TotalSidebar';
 
 const Home = () => {
-    const curr_us_url = 'https://api.covidtracking.com/v1/us/current.json';
-    const notIncludedDataPoints = ["date", "lastModified", "hash", "dateChecked"];
+    const all_countries_url = 'https://corona.lmao.ninja/v2/countries?yesterday&sort';
+    const global_url = 'https://corona.lmao.ninja/v2/all?yesterday';
+    const usa_states_url = 'https://corona.lmao.ninja/v2/states?sort&yesterday';
+    const usa_url = 'https://corona.lmao.ninja/v2/countries/USA?yesterday=true&strict=true&query';
+    const canada_url = 'https://corona.lmao.ninja/v2/countries/Canada?yesterday=true&strict=true&query'
+    const jhu_url = 'https://corona.lmao.ninja/v2/jhucsse';
+    
+    const [countriesResponse, setCountriesResponse] = useState([]);
+    const [globalResponse, setGlobalResponse] = useState({});
+    const [usaStatesResponse, setUsaStatesResponse] = useState({});
+    const [usaResponse, setUsaResponse] = useState({});
+    const [canadaResponse, setCanadaResponse] = useState({});
+    const [canadaProvincesResponse, setCanadaProvincesResponse] = useState([]);
 
-    const [response, setResponse] = useState([]);
-    const [rawData, setRawData] = useState({})
     const [isLoading, setIsLoading] = useState(true);
 
-    const fetchCurrentCountryData = async () => {
-        const response = await fetch(curr_us_url);
-        const results = await response.json();
-        let arr_res = [];
-        for (const [key, value] of Object.entries(results[0])) {
-            if (!notIncludedDataPoints.includes(key)) {
-                let newKey = key.charAt(0).toUpperCase() + key.slice(1);
-                newKey = newKey.split(/(?=[A-Z])/).join(' ');
-                arr_res.push({key:newKey, value})
-            }
-        }
-        setResponse(arr_res)
-        setRawData(results[0])
-        setIsLoading(false)
+    const fetchAllData = async() => {
+        await Promise.all([fetchAllCountriesData(), fetchGlobalData(), fetchUsaStatesData(), fetchUsaData(), fetchCanadaData(), fetchCanadaProvinceData()]);
+        setIsLoading(false);
     }
 
-    const parseDate = () => {
-        var options = { year: 'numeric', month: 'long', day: 'numeric' };
-        return new Date(rawData.dateChecked).toLocaleDateString([],options);
+    const fetchAllCountriesData = async() => {
+        const response = await fetch(all_countries_url);
+        const results = await response.json();
+        results.forEach(country => {
+            country['name'] = country['country']
+        });
+        setCountriesResponse(results);
+    }
+
+    const fetchGlobalData = async() => {
+        const response = await fetch(global_url);
+        const results = await response.json();
+        setGlobalResponse(results);
+    }
+
+    const fetchUsaStatesData = async() => {
+        const response = await fetch(usa_states_url);
+        const results = await response.json();
+        results.forEach(state => {
+            state['name'] = state['state'];
+        });
+        setUsaStatesResponse(results);
+    }
+
+    const fetchUsaData = async() => {
+        const response = await fetch(usa_url);
+        const results = await response.json();
+        setUsaResponse(results);
+    }
+
+    const fetchCanadaData = async() => {
+        const response = await fetch(canada_url);
+        const results = await response.json();
+        setCanadaResponse(results);
+    }
+
+    const fetchCanadaProvinceData = async() => {
+        const response = await fetch(jhu_url);
+        const results = await response.json();
+        let provinces = [];
+        results.forEach(province => {
+            if (province.country === 'Canada') {
+                province['name'] = province['province'];
+                province['cases'] = province['stats']['confirmed'];
+                province['deaths'] = province['stats']['deaths'];
+                province['recovered'] = province['stats']['recovered'];
+                provinces.push(province);
+            }
+        });
+        setCanadaProvincesResponse(provinces);
     }
 
     useEffect(() => {
         setIsLoading(true);
-        fetchCurrentCountryData();
-    }, [response])
+        fetchAllData();
+    }, [])
 
     if (isLoading) {
         return (
@@ -45,20 +91,15 @@ const Home = () => {
             </>
         )
     }
-    
+
     return (
         <>
             <div className="home">
-                <h1>US Covid-19 Statistics As Of:</h1>
-                <h1>{parseDate()}</h1>
-                <div className="card-container">
-                    {response.map((stat, index) => {
-                        return (
-                            <>
-                                <Card key={index} data={stat} />
-                            </>
-                        )
-                    })}
+                <TotalSidebar globalData={globalResponse} />
+                <div className="data__tables">
+                    <StatsTable countriesData={countriesResponse} globalData={globalResponse} title='World Statistics' />
+                    <StatsTable countriesData={usaStatesResponse} globalData={usaResponse} title='USA Statistics' />
+                    <StatsTable countriesData={canadaProvincesResponse} globalData={canadaResponse} title='Canada Statistics' />
                 </div>
             </div>
         </>
