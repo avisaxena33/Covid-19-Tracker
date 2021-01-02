@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './index.css';
+import numberWithCommas from '../../utils/formatters';
 
 const StatsTable = ({ countriesData, globalData, title }) => {
     const [searchText, setSearchText] = useState('');
@@ -23,10 +24,6 @@ const StatsTable = ({ countriesData, globalData, title }) => {
               }
             }
         }
-    };
-
-    const numberWithCommas = (number) => {
-        return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     };
 
     return (
@@ -53,16 +50,16 @@ const StatsTable = ({ countriesData, globalData, title }) => {
                         </tr>
                         <tr>
                             <td className="flag__container">TOTAL</td>
-                            <td className="cases__color">{globalData.cases}</td>
-                            <td className="cases__color">{globalData.todayCases}</td>
-                            <td className="cases__color">{globalData.casesPerOneMillion}</td>
-                            <td className="death__color">{globalData.deaths}</td>
-                            <td className="death__color">{globalData.todayDeaths}</td>
-                            <td className="death__color">{globalData.deathsPerOneMillion}</td>
-                            <td className="active__color">{globalData.active}</td>
-                            <td className="active__color">{globalData.tests}</td>
-                            <td className="recovered__color">{globalData.recovered}</td>
-                            <td className="critical__color">{globalData.critical}</td>
+                            <td className="cases__color">{numberWithCommas(globalData.cases)}</td>
+                            <td className="cases__color">{numberWithCommas(globalData.todayCases)}</td>
+                            <td className="cases__color">{numberWithCommas(globalData.casesPerOneMillion)}</td>
+                            <td className="death__color">{numberWithCommas(globalData.deaths)}</td>
+                            <td className="death__color">{numberWithCommas(globalData.todayDeaths)}</td>
+                            <td className="death__color">{numberWithCommas(globalData.deathsPerOneMillion)}</td>
+                            <td className="active__color">{numberWithCommas(globalData.active)}</td>
+                            <td className="active__color">{numberWithCommas(globalData.tests)}</td>
+                            <td className="recovered__color">{numberWithCommas(globalData.recovered)}</td>
+                            <td className="critical__color">{numberWithCommas(globalData.critical)}</td>
                         </tr>
                         {countriesData.map((country) => {
                             return (
@@ -73,15 +70,15 @@ const StatsTable = ({ countriesData, globalData, title }) => {
                                             {country.name}
                                         </td>
                                         <td className="cases__color">{country.cases || country.cases == 0 ? numberWithCommas(country.cases) : 'Unknown'}</td>
-                                        <td className="cases__color">{country.todayCases || country.todayCases == 0  ? country.todayCases : 'Unknown'}</td>
-                                        <td className="cases__color">{country.casesPerOneMillion || country.casesPerOneMillion == 0  ? country.casesPerOneMillion : 'Unknown'}</td>
-                                        <td className="death__color">{country.deaths || country.deaths == 0 ? country.deaths : 'Unknown'}</td>
-                                        <td className="death__color">{country.todayDeaths || country.todayDeaths == 0  ? country.todayDeaths : 'Unknown'}</td>
-                                        <td className="death__color">{country.deathsPerOneMillion || country.deathsPerOneMillion == 0  ? country.deathsPerOneMillion : 'Unknown'}</td>
-                                        <td className="active__color">{country.active || country.active == 0  ? country.active : 'Unknown'}</td>
-                                        <td className="active__color">{country.tests || country.tests == 0  ? country.tests : 'Unknown'}</td>
-                                        <td className="recovered__color">{country.recovered || country.recovered == 0  ? country.recovered : 'Unknown'}</td>
-                                        <td className="critical__color">{country.critical || country.critical == 0  ? country.critical : 'Unknown'}</td>
+                                        <td className="cases__color">{country.todayCases || country.todayCases == 0  ? numberWithCommas(country.todayCases) : 'Unknown'}</td>
+                                        <td className="cases__color">{country.casesPerOneMillion || country.casesPerOneMillion == 0  ? numberWithCommas(country.casesPerOneMillion) : 'Unknown'}</td>
+                                        <td className="death__color">{country.deaths || country.deaths == 0 ? numberWithCommas(country.deaths) : 'Unknown'}</td>
+                                        <td className="death__color">{country.todayDeaths || country.todayDeaths == 0  ? numberWithCommas(country.todayDeaths) : 'Unknown'}</td>
+                                        <td className="death__color">{country.deathsPerOneMillion || country.deathsPerOneMillion == 0  ? numberWithCommas(country.deathsPerOneMillion) : 'Unknown'}</td>
+                                        <td className="active__color">{country.active || country.active == 0  ? numberWithCommas(country.active) : 'Unknown'}</td>
+                                        <td className="active__color">{country.tests || country.tests == 0  ? numberWithCommas(country.tests) : 'Unknown'}</td>
+                                        <td className="recovered__color">{country.recovered || country.recovered == 0  ? numberWithCommas(country.recovered) : 'Unknown'}</td>
+                                        <td className="critical__color">{country.critical || country.critical == 0  ? numberWithCommas(country.critical) : 'Unknown'}</td>
                                     </tr>
                                 </>
                             )
