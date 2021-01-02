@@ -6,6 +6,7 @@ const TotalSidebar = ({ globalData }) => {
     return (
         <>
             <div className="sidebar">
+                <h1>World Totals</h1>
                 <h1 className="cases__color">Cases: {globalData.cases}</h1>
                 <h1 className="death__color">Deaths: {globalData.deaths}</h1>
                 <h1 className="active__color">Activate Cases: {globalData.active}</h1>

@@ -9,9 +9,8 @@ const MainNavbar = () => {
         <>
             <div className="navbar">
                 <div className="navbar__left">
-                    <h3 className="navbar__option">Covid-19 Tracker</h3>
                     <Link to="/" className="navbar-title">
-                        <h3 className="navbar__option">World</h3>
+                        <h3 className="navbar__option">Covid-19 Tracker</h3>
                     </Link>
                     <Link to="/usa" className="navbar-title">
                         <h3 className="navbar__option">USA</h3>
