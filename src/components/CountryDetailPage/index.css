@@ -4,8 +4,8 @@ body {
   font-family: Arial;
   text-align: center;
 }
-
-.home {
+  
+.countryDetailPage {
   display: flex;
   justify-content: space-around;
 }
@@ -23,11 +23,12 @@ body {
 .data__tables {
   display: flex;
   flex-direction: column;
+  flex-wrap: nowrap;
   padding: 0px 25px; 
 }
 
 @media screen and (max-width:990px) {
-  .home { flex-direction: column;  }
+.home { flex-direction: column;  }
 }
 
 .leftSidebar {
@@ -36,5 +37,4 @@ body {
   justify-content: space-around;
   height: 100%;
 }
-
 
