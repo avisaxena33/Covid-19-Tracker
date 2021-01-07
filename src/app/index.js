@@ -1,7 +1,6 @@
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 // Component imports
 import Home from "../components/Home";
-import Navbar from "../components/Navbar";
 import CountryDetailPage from "../components/CountryDetailPage";
 import { useHistory } from 'react-router-dom';
 
@@ -10,7 +9,6 @@ const App = () => {
 
   return (
     <Router>
-      <Navbar />
       <Switch>
         <Route exact path="/">
           <Home />

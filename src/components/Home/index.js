@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './index.css';
 import StatsTable from '../StatsTable';
 import TotalSidebar from '../TotalSidebar';
+import Navbar from "../Navbar";
 import { fetchHomePageData } from '../../utils/fetchCovidData';
 
 const Home = () => {
@@ -53,18 +54,21 @@ const Home = () => {
     return (
         <>
             <div className="home">
-                <div className="leftSidebar">
-                    <TotalSidebar />
-                </div>
-                <div className="data__tables">
-                    <StatsTable typeData={countriesResponse} totalData={globalResponse} title='World Statistics' type='Country' />
-                    <StatsTable typeData={usaStatesResponse} totalData={usaResponse} title='USA Statistics'  type='State' />
-                    <StatsTable typeData={canadaProvincesResponse} totalData={canadaResponse} title='Canada Statistics' type='Province' />
-                    <StatsTable typeData={europeCountriesResponse} totalData={europeResponse} title='Europe Statistics' type='Country' />
-                    <StatsTable typeData={asiaCountriesResponse} totalData={asiaResponse} title='Asia Statistics' type='Country' />
-                    <StatsTable typeData={oceaniaCountriesResponse} totalData={oceaniaResponse} title='Oceania Statistics' type='Country' />
-                    <StatsTable typeData={africaCountriesResponse} totalData={africaResponse} title='Africa Statistics' type='Country' />
-                    <StatsTable typeData={southAmericaCountriesResponse} totalData={southAmericaResponse} title='South America Statistics' type='Country' />
+                <Navbar />
+                <div className="mainBody">
+                    <div className="leftSidebar">
+                        <TotalSidebar />
+                    </div>
+                    <div className="data__tables">
+                        <StatsTable typeData={countriesResponse} totalData={globalResponse} title='World Statistics' type='Country' />
+                        <StatsTable typeData={usaStatesResponse} totalData={usaResponse} title='USA Statistics'  type='State' />
+                        <StatsTable typeData={canadaProvincesResponse} totalData={canadaResponse} title='Canada Statistics' type='Province' />
+                        <StatsTable typeData={europeCountriesResponse} totalData={europeResponse} title='Europe Statistics' type='Country' />
+                        <StatsTable typeData={asiaCountriesResponse} totalData={asiaResponse} title='Asia Statistics' type='Country' />
+                        <StatsTable typeData={oceaniaCountriesResponse} totalData={oceaniaResponse} title='Oceania Statistics' type='Country' />
+                        <StatsTable typeData={africaCountriesResponse} totalData={africaResponse} title='Africa Statistics' type='Country' />
+                        <StatsTable typeData={southAmericaCountriesResponse} totalData={southAmericaResponse} title='South America Statistics' type='Country' />
+                    </div>
                 </div>
             </div>
         </>

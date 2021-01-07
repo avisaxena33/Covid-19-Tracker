@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Switch, Route, useParams } from "react-router-
 import './index.css';
 import StatsTable from '../StatsTable';
 import TotalSidebar from '../TotalSidebar';
+import Navbar from "../Navbar";
 import { fetchUsaPageData, fetchCanadaPageData, fetchEuropePageData, fetchAsiaPageData, fetchOceaniaPageData, fetchAfricaResponse, fetchSouthAmericaPageData, fetchAfricaPageData } from '../../utils/fetchCovidData';
 
 
@@ -61,12 +62,15 @@ const CountryDetailPage = () => {
 
     return (
         <>
-            <div className="countryDetailPage">
-                <div className="leftSidebar">
-                    <TotalSidebar />
-                </div>
-                <div className="data__tables">
-                    <StatsTable typeData={typeResponse} totalData={totalResponse} title={title} type={type} />
+            <div className="home">
+                <Navbar />
+                <div className="mainBody">
+                    <div className="leftSidebar">
+                        <TotalSidebar />
+                    </div>
+                    <div className="data__tables">
+                        <StatsTable typeData={typeResponse} totalData={totalResponse} title={title} type={type} />
+                    </div>
                 </div>
             </div>
         </>

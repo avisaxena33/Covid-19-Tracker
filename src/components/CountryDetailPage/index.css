@@ -4,9 +4,15 @@ body {
   font-family: Arial;
   text-align: center;
 }
-  
-.countryDetailPage {
+
+.mainBody {
   display: flex;
+  justify-content: space-between;
+}
+
+.home {
+  display: flex;
+  flex-direction: column;
   justify-content: space-around;
 }
 
@@ -23,18 +29,16 @@ body {
 .data__tables {
   display: flex;
   flex-direction: column;
-  flex-wrap: nowrap;
-  padding: 0px 25px; 
 }
 
 @media screen and (max-width:990px) {
-.home { flex-direction: column;  }
+  .home { flex-direction: column;  }
 }
 
 .leftSidebar {
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
-  height: 100%;
+  justify-content: space-between;
 }
+
 
