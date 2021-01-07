@@ -13,19 +13,28 @@ h2 {
 }
   
 .country__table__scroll {
-  height: 400px;
-  overflow:auto;  
-  margin-top:20px;
+    height: 400px;
+    overflow:auto;  
+    margin-top:20px;
 }
 
 .top {
-  display: flex;
-  justify-content: space-between;
+    display: flex;
+    justify-content: space-between;
+}
+
+.tableTitle {
+    margin-left: 15px;
 }
 
 .search {
-  background-color: #3d434e;
-  color: white;
+    margin-right: 25px;
+    background-color: #3d434e;
+    color: white;
+}
+
+table {
+    width: 100%;
 }
 
 table, th, td {

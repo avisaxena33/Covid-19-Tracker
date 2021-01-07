@@ -30,7 +30,7 @@ const StatsTable = ({ typeData, totalData, title, type }) => {
         <>
             <div className="country__table">
                 <div className="top">
-                    <h2>{title}</h2>
+                    <h2 className="tableTitle">{title}</h2>
                     <input class="search" type="text" value={searchText} onChange={(e) => setSearchText(e.target.value)} placeholder="search here" />
                 </div>
                 <div className="country__table__scroll">
