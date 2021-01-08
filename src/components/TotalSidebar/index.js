@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { useHistory, Link } from 'react-router-dom'
 import './index.css'
 import numberWithCommas from '../../utils/formatters';
 import { fetchGlobalData } from '../../utils/fetchCovidData';
@@ -8,21 +7,19 @@ const TotalSidebar = () => {
     const [globalResponse, setGlobalResponse] = useState({});
     const [isLoading, setIsLoading] = useState(true);
 
-    const currentDate = new Date().toLocaleString();
-    const currentTimezone = new Date().toLocaleTimeString('en-us',{timeZoneName:'short'}).split(' ')[2];
-
-    const fetchAllData = async() => {
-        await Promise.all([fetchGlobalData(setGlobalResponse)]);
-        await setIsLoading(false);
-        liveUpdates();
-    }
-
-    const liveUpdates = async() => {
-        await Promise.all([fetchGlobalData(setGlobalResponse)]);
-        await liveUpdates();
-    }
-
     useEffect(() => {
+        const fetchAllData = async() => {
+            await Promise.all([fetchGlobalData(setGlobalResponse)]);
+            await setIsLoading(false);
+            liveUpdates();
+        }
+
+        const liveUpdates = async() => {
+            await Promise.all([fetchGlobalData(setGlobalResponse)]);
+            await liveUpdates();
+        }
+
+        
         fetchAllData();
     }, [])
 
@@ -39,15 +36,26 @@ const TotalSidebar = () => {
     return (
         <>
             <div className="sidebar">
-                <h1>World Totals</h1>
-                <h7>Updated as of: {currentDate} {currentTimezone}</h7>
-                <h1 className="cases__color">Cases: {numberWithCommas(globalResponse.cases)}</h1>
-                <h1 className="death__color">Deaths: {numberWithCommas(globalResponse.deaths)}</h1>
-                <h1 className="active__color">Activate Cases: {numberWithCommas(globalResponse.active)}</h1>
-                <h1 className="critical__color">Critical Cases: {numberWithCommas(globalResponse.critical)}</h1>
-                <h1 className="recovered__color">Recovered: {numberWithCommas(globalResponse.recovered)}</h1>
-                <h1 className="recovered__color">Tests: {numberWithCommas(globalResponse.tests)}</h1>
-                {globalResponse.affectedCountries && <h1 className="death__color">Countries Affected: {numberWithCommas(globalResponse.affectedCountries)}</h1>}
+                <div className="liveContainer">
+                    <h1>World Totals</h1>
+                    <div>
+                        <h3>LIVE</h3> 
+                    </div>
+                </div>
+                <h1 className="casesColor">{numberWithCommas(globalResponse.cases)}</h1>
+                <h2>Cases</h2>
+                <h1 className="deathColor">{numberWithCommas(globalResponse.deaths)}</h1>
+                <h2>Deaths</h2> 
+                <h1 className="activeColor">{numberWithCommas(globalResponse.active)}</h1>
+                <h2>Activate Cases</h2>
+                <h1 className="criticalColor">{numberWithCommas(globalResponse.critical)}</h1>
+                <h2>Critical Cases</h2>
+                <h1 className="recoveredColor">{numberWithCommas(globalResponse.recovered)}</h1>
+                <h2>Recovered</h2>
+                <h1 className="recoveredColor">{numberWithCommas(globalResponse.tests)}</h1>
+                <h2>Tests</h2>
+                {globalResponse.affectedCountries && <h1 className="countriesAffectedColor">{numberWithCommas(globalResponse.affectedCountries)}</h1>}
+                {globalResponse.affectedCountries && <h2>Countries Affected</h2>}
             </div>
         </>
     )

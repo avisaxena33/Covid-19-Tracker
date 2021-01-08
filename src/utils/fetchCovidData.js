@@ -3,8 +3,6 @@ import asiaCountries from '../data/asianCountries';
 import oceaniaCountries from '../data/oceaniaCountries';
 import africaCountries from '../data/africanCountries';
 import southAmericaCountries from '../data/southAmericaCountries';
-import asianCountries from '../data/asianCountries';
-
 
 const all_countries_url = 'https://corona.lmao.ninja/v2/countries?yesterday&sort';
 const global_url = 'https://corona.lmao.ninja/v2/all?yesterday';
@@ -114,7 +112,7 @@ export const fetchAsiaResponse = async(setAsiaResponse) => {
 }
 
 export const fetchAsiaCountriesResponse = async(setAsiaCountriesResponse) => {
-    let queryString = asianCountries.map(country => {
+    let queryString = asiaCountries.map(country => {
         return (country.code || country.country);
     }).join(',');
     const url = multipleCountriesUrl.replace(':query', queryString);

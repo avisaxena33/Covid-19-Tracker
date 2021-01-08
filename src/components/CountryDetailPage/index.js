@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Switch, Route, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import './index.css';
 import StatsTable from '../StatsTable';
 import TotalSidebar from '../TotalSidebar';
 import Navbar from "../Navbar";
-import { fetchUsaPageData, fetchCanadaPageData, fetchEuropePageData, fetchAsiaPageData, fetchOceaniaPageData, fetchAfricaResponse, fetchSouthAmericaPageData, fetchAfricaPageData } from '../../utils/fetchCovidData';
+import { fetchUsaPageData, fetchCanadaPageData, fetchEuropePageData, fetchAsiaPageData, fetchOceaniaPageData, fetchSouthAmericaPageData, fetchAfricaPageData } from '../../utils/fetchCovidData';
 
 
 const CountryDetailPage = () => {
@@ -38,15 +38,16 @@ const CountryDetailPage = () => {
             case 'South America':
                 await fetchSouthAmericaPageData(setTypeResponse, setTotalResponse);
                 break;
+            default:
+                break;
         }
     }
 
-    const fetchAllData = async() => {
-        await fetchCorrectData(countryName);            
-        await setIsLoading(false);
-    }
-
     useEffect(() => {
+        const fetchAllData = async() => {
+            await fetchCorrectData(countryName);            
+            await setIsLoading(false);
+        }
         fetchAllData();
     }, [countryName])
 

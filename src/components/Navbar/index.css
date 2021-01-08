@@ -1,20 +1,35 @@
 .navbar {
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-between;
+    align-items: center;
     position: sticky;
     top: 0;
     z-index: 200;
-    background-color: #0e1e3b;
+    background-color: black;
+}
+
+.navbarLeft {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.navbarRight {
+    display: flex;
 }
 
 @media screen and (max-width:990px) {
-    .navbar { flex-direction: column;  }
+    .navbar { 
+        flex-direction: column;
+    }
 }
 
-.navbar-title {
+.navbarTitle {
     color: white;
+    text-decoration: none !important;
 }
 
-.navbar-title:hover {
-    color: red;
+.navbarTitle:hover {
+    color: white;
 }

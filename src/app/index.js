@@ -2,10 +2,8 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 // Component imports
 import Home from "../components/Home";
 import CountryDetailPage from "../components/CountryDetailPage";
-import { useHistory } from 'react-router-dom';
 
 const App = () => {
-  const history = useHistory();
 
   return (
     <Router>
