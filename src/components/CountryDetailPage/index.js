@@ -6,7 +6,6 @@ import TotalSidebar from '../TotalSidebar';
 import Navbar from "../Navbar";
 import { fetchUsaPageData, fetchCanadaPageData, fetchEuropePageData, fetchAsiaPageData, fetchOceaniaPageData, fetchSouthAmericaPageData, fetchAfricaPageData } from '../../utils/fetchCovidData';
 
-
 const CountryDetailPage = () => {
     const { type, countryName } = useParams();
     const title = countryName.concat(' ').concat('Statistics');
