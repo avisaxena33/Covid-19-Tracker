@@ -12,6 +12,7 @@ const canada_url = 'https://corona.lmao.ninja/v2/countries/Canada?yesterday=true
 const jhu_url = 'https://corona.lmao.ninja/v2/jhucsse';
 const continent_url = 'https://corona.lmao.ninja/v2/continents/:query?yesterday&strict';
 const multipleCountriesUrl = 'https://corona.lmao.ninja/v2/countries/:query?yesterday';
+const historicalDataCountryUrl = 'https://corona.lmao.ninja/v2/historical/:query?lastdays=30';
 
 export const fetchAllCountriesData = async(setCountriesResponse) => {
     const response = await fetch(all_countries_url);
@@ -48,8 +49,15 @@ export const fetchUsaData = async(setUsaResponse) => {
     setUsaResponse(results);
 }
 
-export const fetchUsaPageData = async(setTypeResponse, setTotalResponse) => {
-    await Promise.all([fetchUsaStatesData(setTypeResponse), fetchUsaData(setTotalResponse)]);
+export const fetchUsaHistorialData = async(setUsaHistoricalResponse) => {
+    const url = historicalDataCountryUrl.replace(':query', 'usa');
+    const response = await fetch(url);
+    const results = await response.json();
+    setUsaHistoricalResponse(results);
+}
+
+export const fetchUsaPageData = async(setTypeResponse, setTotalResponse, setHistoricalResponse) => {
+    await Promise.all([fetchUsaStatesData(setTypeResponse), fetchUsaData(setTotalResponse), fetchUsaHistorialData(setHistoricalResponse)]);
 }
 
 export const fetchCanadaData = async(setCanadaResponse) => {

@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import './index.css';
 import StatsTable from '../StatsTable';
 import TotalSidebar from '../TotalSidebar';
+import HistoricalChart from '../HistoricalChart';
 import Navbar from "../Navbar";
 import { fetchUsaPageData, fetchCanadaPageData, fetchEuropePageData, fetchAsiaPageData, fetchOceaniaPageData, fetchSouthAmericaPageData, fetchAfricaPageData } from '../../utils/fetchCovidData';
 
@@ -12,12 +13,15 @@ const CountryDetailPage = () => {
 
     const [typeResponse, setTypeResponse] = useState({});
     const [totalResponse, setTotalResponse] = useState({});
+    const [historicalResponse, setHistoricalResponse] = useState({});
     const [isLoading, setIsLoading] = useState(true);
+
+    console.log(historicalResponse);
 
     const fetchCorrectData = async(countryName) => {
         switch (countryName) {
             case 'USA':
-                await fetchUsaPageData(setTypeResponse, setTotalResponse);
+                await fetchUsaPageData(setTypeResponse, setTotalResponse, setHistoricalResponse);
                 break;
             case 'Canada':
                 await fetchCanadaPageData(setTypeResponse, setTotalResponse);
@@ -70,6 +74,7 @@ const CountryDetailPage = () => {
                     </div>
                     <div className="data__tables">
                         <StatsTable typeData={typeResponse} totalData={totalResponse} title={title} type={type} />
+                        <HistoricalChart data={historicalResponse} />
                     </div>
                 </div>
             </div>
