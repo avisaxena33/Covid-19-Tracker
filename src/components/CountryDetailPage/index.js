@@ -5,7 +5,8 @@ import StatsTable from '../StatsTable';
 import TotalSidebar from '../TotalSidebar';
 import HistoricalChart from '../HistoricalChart';
 import Navbar from "../Navbar";
-import { fetchUsaPageData, fetchCanadaPageData, fetchEuropePageData, fetchAsiaPageData, fetchOceaniaPageData, fetchSouthAmericaPageData, fetchAfricaPageData } from '../../utils/fetchCovidData';
+import { fetchUsaPageData, fetchCanadaPageData, fetchEuropePageData, fetchAsiaPageData, 
+    fetchOceaniaPageData, fetchSouthAmericaPageData, fetchAfricaPageData } from '../../utils/mainApi';
 
 const CountryDetailPage = () => {
     const { type, countryName } = useParams();
@@ -16,30 +17,28 @@ const CountryDetailPage = () => {
     const [historicalResponse, setHistoricalResponse] = useState({});
     const [isLoading, setIsLoading] = useState(true);
 
-    console.log(historicalResponse);
-
     const fetchCorrectData = async(countryName) => {
         switch (countryName) {
             case 'USA':
                 await fetchUsaPageData(setTypeResponse, setTotalResponse, setHistoricalResponse);
                 break;
             case 'Canada':
-                await fetchCanadaPageData(setTypeResponse, setTotalResponse);
+                await fetchCanadaPageData(setTypeResponse, setTotalResponse, setHistoricalResponse);
                 break;
             case 'Europe':
-                await fetchEuropePageData(setTypeResponse, setTotalResponse);
+                await fetchEuropePageData(setTypeResponse, setTotalResponse, setHistoricalResponse);
                 break;
             case 'Asia':
-                await fetchAsiaPageData(setTypeResponse, setTotalResponse);
+                await fetchAsiaPageData(setTypeResponse, setTotalResponse, setHistoricalResponse);
                 break;
             case 'Oceania':
-                await fetchOceaniaPageData(setTypeResponse, setTotalResponse);
+                await fetchOceaniaPageData(setTypeResponse, setTotalResponse, setHistoricalResponse);
                 break;
             case 'Africa':
-                await fetchAfricaPageData(setTypeResponse, setTotalResponse);
+                await fetchAfricaPageData(setTypeResponse, setTotalResponse, setHistoricalResponse);
                 break;
             case 'South America':
-                await fetchSouthAmericaPageData(setTypeResponse, setTotalResponse);
+                await fetchSouthAmericaPageData(setTypeResponse, setTotalResponse, setHistoricalResponse);
                 break;
             default:
                 break;

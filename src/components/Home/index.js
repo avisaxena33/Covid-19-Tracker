@@ -3,7 +3,7 @@ import './index.css';
 import StatsTable from '../StatsTable';
 import TotalSidebar from '../TotalSidebar';
 import Navbar from "../Navbar";
-import { fetchHomePageData } from '../../utils/fetchCovidData';
+import { fetchHomePageData } from '../../utils/mainApi';
 
 const Home = () => {
 
@@ -23,7 +23,6 @@ const Home = () => {
     const [africaCountriesResponse, setAfricaCountriesResponse] = useState([]);
     const [southAmericaResponse, setSouthAmericaResponse] = useState({});
     const [southAmericaCountriesResponse, setSouthAmericaCountriesResponse] = useState([]);
-
 
     const [isLoading, setIsLoading] = useState(true);
 

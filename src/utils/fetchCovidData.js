@@ -12,217 +12,476 @@ const canada_url = 'https://corona.lmao.ninja/v2/countries/Canada?yesterday=true
 const jhu_url = 'https://corona.lmao.ninja/v2/jhucsse';
 const continent_url = 'https://corona.lmao.ninja/v2/continents/:query?yesterday&strict';
 const multipleCountriesUrl = 'https://corona.lmao.ninja/v2/countries/:query?yesterday';
-const historicalDataCountryUrl = 'https://corona.lmao.ninja/v2/historical/:query?lastdays=30';
+const historicalDataCountryUrl = 'https://corona.lmao.ninja/v2/historical/:query?lastdays=all';
 
 export const fetchAllCountriesData = async(setCountriesResponse) => {
-    const response = await fetch(all_countries_url);
-    const results = await response.json();
-    results.forEach(country => {
-        country['name'] = country['country']
-    });
-    setCountriesResponse(results);
+    try {
+        const response = await fetch(all_countries_url);
+        const results = await response.json();
+        results.forEach(country => {
+            country['name'] = country['country']
+        });
+        setCountriesResponse(results);
+    } catch (error) {
+        throw new Error(error);
+    }
 }
 
 export const fetchGlobalData = async(setGlobalResponse) => {
-    const response = await fetch(global_url);
-    const results = await response.json();
-    setGlobalResponse(results);
+    try {
+        const response = await fetch(global_url);
+        const results = await response.json();
+        setGlobalResponse(results);
+    } catch (error) {
+        throw new Error(error);
+    }
 }
 
-export const fetchGlobalPageData = async(setTypeResponse, setTotalResponse) => {
-    await Promise.all([fetchAllCountriesData(setTypeResponse), 
-        fetchGlobalData(setTotalResponse)]);
+export const fetchGlobalHomePageData = async(setTypeResponse, setTotalResponse) => {
+    try {
+        await Promise.all([fetchAllCountriesData(setTypeResponse), fetchGlobalData(setTotalResponse)]);
+    } catch (error) {
+        throw new Error(error);
+    }
 }
 
 export const fetchUsaStatesData = async(setUsaStatesResponse) => {
-    const response = await fetch(usa_states_url);
-    const results = await response.json();
-    results.forEach(state => {
-        state['name'] = state['state'];
-    });
-    setUsaStatesResponse(results);
+    try {
+        const response = await fetch(usa_states_url);
+        const results = await response.json();
+        results.forEach(state => {
+            state['name'] = state['state'];
+        });
+        setUsaStatesResponse(results);
+    } catch (error) {
+        throw new Error(error);
+    }
 }
 
 export const fetchUsaData = async(setUsaResponse) => {
-    const response = await fetch(usa_url);
-    const results = await response.json();
-    setUsaResponse(results);
+    try {
+        const response = await fetch(usa_url);
+        const results = await response.json();
+        setUsaResponse(results);
+    } catch (error) {
+        throw new Error(error);
+    }
 }
 
-export const fetchUsaHistorialData = async(setUsaHistoricalResponse) => {
-    const url = historicalDataCountryUrl.replace(':query', 'usa');
-    const response = await fetch(url);
-    const results = await response.json();
-    setUsaHistoricalResponse(results);
+export const fetchUsaHistoricalData = async(setUsaHistoricalResponse) => {
+    try {
+        const url = historicalDataCountryUrl.replace(':query', 'usa');
+        const response = await fetch(url);
+        const results = await response.json();
+        setUsaHistoricalResponse(results);
+    } catch (error) {
+        throw new Error(error);
+    }
 }
 
-export const fetchUsaPageData = async(setTypeResponse, setTotalResponse, setHistoricalResponse) => {
-    await Promise.all([fetchUsaStatesData(setTypeResponse), fetchUsaData(setTotalResponse), fetchUsaHistorialData(setHistoricalResponse)]);
+export const fetchUsaHomePageData = async(setTypeResponse, setTotalResponse) => {
+    try {
+        await Promise.all([fetchUsaStatesData(setTypeResponse), fetchUsaData(setTotalResponse)]);
+    } catch (error) {
+        throw new Error(error);
+    }
 }
 
 export const fetchCanadaData = async(setCanadaResponse) => {
-    const response = await fetch(canada_url);
-    const results = await response.json();
-    setCanadaResponse(results);
+    try {
+        const response = await fetch(canada_url);
+        const results = await response.json();
+        setCanadaResponse(results);
+    } catch (error) {
+        throw new Error(error);
+    }
 }
 
 export const fetchCanadaProvinceData = async(setCanadaProvincesResponse) => {
-    const response = await fetch(jhu_url);
-    const results = await response.json();
-    let provinces = [];
-    results.forEach(province => {
-        if (province.country === 'Canada') {
-            province['name'] = province['province'];
-            province['cases'] = province['stats']['confirmed'];
-            province['deaths'] = province['stats']['deaths'];
-            province['recovered'] = province['stats']['recovered'];
-            provinces.push(province);
-        }
-    });
-    setCanadaProvincesResponse(provinces);
+    try {
+        const response = await fetch(jhu_url);
+        const results = await response.json();
+        let provinces = [];
+        results.forEach(province => {
+            if (province.country === 'Canada') {
+                province['name'] = province['province'];
+                province['cases'] = province['stats']['confirmed'];
+                province['deaths'] = province['stats']['deaths'];
+                province['recovered'] = province['stats']['recovered'];
+                provinces.push(province);
+            }
+        });
+        setCanadaProvincesResponse(provinces);
+    } catch (error) {
+        throw new Error(error);
+    }
 }
 
-export const fetchCanadaPageData = async(setTypeResponse, setTotalResponse) => {
-    await Promise.all([fetchCanadaProvinceData(setTypeResponse), 
-        fetchCanadaData(setTotalResponse)]);
+export const fetchCanadaHistoricalData = async(setCanadaHistoricalResponse) => {
+    try {
+        const url = historicalDataCountryUrl.replace(':query', 'canada');
+        const response = await fetch(url);
+        const results = await response.json();
+        setCanadaHistoricalResponse(results);
+    } catch (error) {
+        throw new Error(error);
+    }
 }
 
-export const fetchEuropeResponse = async(setEuropeResponse) => {
-    const url = continent_url.replace(':query', 'Europe');
-    const response = await fetch(url);
-    const results = await response.json();
-    setEuropeResponse(results);
+export const fetchCanadaHomePageData = async(setTypeResponse, setTotalResponse) => {
+    try {
+        await Promise.all([fetchCanadaProvinceData(setTypeResponse), fetchCanadaData(setTotalResponse)]);
+    } catch (error) {
+        throw new Error(error);
+    }
 }
 
-export const fetchEuropeCountriesResponse = async(setEuropeCountriesResponse) => {
-    let queryString = europeCountries.map(country => {
-        return country.code;
-    }).join(',');
-    const url = multipleCountriesUrl.replace(':query', queryString);
-    const response = await fetch(url);
-    const results = await response.json();
-    results.forEach(country => {
-        country['name'] = country['country'];
-    });
-    setEuropeCountriesResponse(results);
+export const fetchEuropeData = async(setEuropeResponse) => {
+    try {
+        const url = continent_url.replace(':query', 'Europe');
+        const response = await fetch(url);
+        const results = await response.json();
+        setEuropeResponse(results);
+    } catch (error) {
+        throw new Error(error);
+    }
 }
 
-export const fetchEuropePageData = async(setTypeResponse, setTotalResponse) => {
-    await Promise.all([fetchEuropeCountriesResponse(setTypeResponse), 
-        fetchEuropeResponse(setTotalResponse)]);
+export const fetchEuropeCountriesData = async(setEuropeCountriesResponse) => {
+    try {
+        let queryString = europeCountries.map(country => {
+            return (country.alpha3Code || country.alpha2Code || country.name);
+        }).join(',');
+        const url = multipleCountriesUrl.replace(':query', queryString);
+        const response = await fetch(url);
+        const results = await response.json();
+        results.forEach(country => {
+            country['name'] = country['country'];
+        });
+        setEuropeCountriesResponse(results);
+    } catch (error) {
+        throw new Error(error);
+    }
 }
 
-export const fetchAsiaResponse = async(setAsiaResponse) => {
-    const url = continent_url.replace(':query', 'Asia');
-    const response = await fetch(url);
-    const results = await response.json();
-    setAsiaResponse(results);
+export const fetchEuropeHistoricalData = async(setEuropeHistoricalResponse) => {
+    try {
+        let europeHistoricalResults = {
+            'timeline': {
+                'cases': {},
+                'deaths': {},
+                'recovered': {}
+            }
+        };
+        const queryString = europeCountries.map(country => {
+            return (country.alpha3Code || country.alpha2Code || country.name);
+        }).join(',');
+        const url = historicalDataCountryUrl.replace(':query', queryString);
+        const response = await fetch(url);
+        const results = await response.json();
+        results.forEach(country => {
+            if (country.timeline) {
+                for (const [dataDate, cases] of Object.entries(country.timeline.cases)) {
+                    europeHistoricalResults.timeline.cases[dataDate] ? europeHistoricalResults.timeline.cases[dataDate] += cases : europeHistoricalResults.timeline.cases[dataDate] = cases;
+                }
+                for (const [dataDate, deaths] of Object.entries(country.timeline.deaths)) {
+                    europeHistoricalResults.timeline.deaths[dataDate] ? europeHistoricalResults.timeline.deaths[dataDate] += deaths : europeHistoricalResults.timeline.deaths[dataDate] = deaths;
+                }
+                for (const [dataDate, recovered] of Object.entries(country.timeline.recovered)) {
+                    europeHistoricalResults.timeline.recovered[dataDate] ? europeHistoricalResults.timeline.recovered[dataDate] += recovered : europeHistoricalResults.timeline.recovered[dataDate] = recovered;
+                }
+            }
+        });
+        setEuropeHistoricalResponse(europeHistoricalResults);
+    } catch (error) {
+        throw new Error(error);
+    }
 }
 
-export const fetchAsiaCountriesResponse = async(setAsiaCountriesResponse) => {
-    let queryString = asiaCountries.map(country => {
-        return (country.code || country.country);
-    }).join(',');
-    const url = multipleCountriesUrl.replace(':query', queryString);
-    const response = await fetch(url);
-    const results = await response.json();
-    results.forEach(country => {
-        country['name'] = country['country'];
-    });
-    setAsiaCountriesResponse(results);
+export const fetchEuropeHomePageData = async(setTypeResponse, setTotalResponse) => {
+    try {
+        await Promise.all([fetchEuropeCountriesData(setTypeResponse), fetchEuropeData(setTotalResponse)]);
+    } catch (error) {
+        throw new Error(error);
+    }
 }
 
-export const fetchAsiaPageData = async(setTypeResponse, setTotalResponse) => {
-    await Promise.all([fetchAsiaCountriesResponse(setTypeResponse), 
-        fetchAsiaResponse(setTotalResponse)]);
+export const fetchAsiaData = async(setAsiaResponse) => {
+    try {
+        const url = continent_url.replace(':query', 'Asia');
+        const response = await fetch(url);
+        const results = await response.json();
+        setAsiaResponse(results);
+    } catch (error) {
+        throw new Error(error);
+    }
 }
 
-export const fetchOceaniaResponse = async(setOceaniaResponse) => {
-    const url = continent_url.replace(':query', 'Oceania');
-    const response = await fetch(url);
-    const results = await response.json();
-    setOceaniaResponse(results);
+export const fetchAsiaCountriesData = async(setAsiaCountriesResponse) => {
+    try {
+        let queryString = asiaCountries.map(country => {
+            return (country.alpha3Code || country.alpha2Code || country.name);
+        }).join(',');
+        const url = multipleCountriesUrl.replace(':query', queryString);
+        const response = await fetch(url);
+        const results = await response.json();
+        results.forEach(country => {
+            country['name'] = country['country'];
+        });
+        setAsiaCountriesResponse(results);
+    } catch (error) {
+        throw new Error(error);
+    }
 }
 
-export const fetchOceaniaCountriesResponse = async(setOceaniaCountriesResponse) => {
-    let queryString = oceaniaCountries.map(country => {
-        return (country.code || country.country);
-    }).join(',');
-    const url = multipleCountriesUrl.replace(':query', queryString);
-    const response = await fetch(url);
-    const results = await response.json();
-    results.forEach(country => {
-        country['name'] = country['country'];
-    });
-    setOceaniaCountriesResponse(results);
+export const fetchAsiaHistoricalData = async(setAsiaHistoricalResponse) => {
+    try {
+        let asiaHistoricalResults = {
+            'timeline': {
+                'cases': {},
+                'deaths': {},
+                'recovered': {}
+            }
+        };
+        const queryString = asiaCountries.map(country => {
+            return (country.alpha3Code || country.alpha2Code || country.name);
+        }).join(',');
+        const url = historicalDataCountryUrl.replace(':query', queryString);
+        const response = await fetch(url);
+        const results = await response.json();
+        results.forEach(country => {
+            if (country.timeline) {
+                for (const [dataDate, cases] of Object.entries(country.timeline.cases)) {
+                    asiaHistoricalResults.timeline.cases[dataDate] ? asiaHistoricalResults.timeline.cases[dataDate] += cases : asiaHistoricalResults.timeline.cases[dataDate] = cases;
+                }
+                for (const [dataDate, deaths] of Object.entries(country.timeline.deaths)) {
+                    asiaHistoricalResults.timeline.deaths[dataDate] ? asiaHistoricalResults.timeline.deaths[dataDate] += deaths : asiaHistoricalResults.timeline.deaths[dataDate] = deaths;
+                }
+                for (const [dataDate, recovered] of Object.entries(country.timeline.recovered)) {
+                    asiaHistoricalResults.timeline.recovered[dataDate] ? asiaHistoricalResults.timeline.recovered[dataDate] += recovered : asiaHistoricalResults.timeline.recovered[dataDate] = recovered;
+                }
+            }
+        });
+        setAsiaHistoricalResponse(asiaHistoricalResults);
+    } catch (error) {
+        throw new Error(error);
+    }
 }
 
-export const fetchOceaniaPageData = async(setTypeResponse, setTotalResponse) => {
-    await Promise.all([fetchOceaniaCountriesResponse(setTypeResponse), 
-        fetchOceaniaResponse(setTotalResponse)]);
+export const fetchAsiaHomePageData = async(setTypeResponse, setTotalResponse) => {
+    try{
+        await Promise.all([fetchAsiaCountriesData(setTypeResponse), fetchAsiaData(setTotalResponse)]);
+    } catch (error) {
+        throw new Error(error);
+    }
 }
 
-export const fetchAfricaResponse = async(setAfricaResponse) => {
-    const url = continent_url.replace(':query', 'Africa');
-    const response = await fetch(url);
-    const results = await response.json();
-    setAfricaResponse(results);
+export const fetchOceaniaData = async(setOceaniaResponse) => {
+    try {
+        const url = continent_url.replace(':query', 'Oceania');
+        const response = await fetch(url);
+        const results = await response.json();
+        setOceaniaResponse(results);
+    } catch (error) {
+        throw new Error(error);
+    }
 }
 
-export const fetchAfricaCountriesResponse = async(setAfricaCountriesResponse) => {
-    let queryString = africaCountries.map(country => {
-        return (country.code || country.country);
-    }).join(',');
-    const url = multipleCountriesUrl.replace(':query', queryString);
-    const response = await fetch(url);
-    const results = await response.json();
-    results.forEach(country => {
-        country['name'] = country['country'];
-    });
-    setAfricaCountriesResponse(results);
+export const fetchOceaniaCountriesData = async(setOceaniaCountriesResponse) => {
+    try {
+        let queryString = oceaniaCountries.map(country => {
+            return (country.alpha3Code || country.alpha2Code || country.name);
+        }).join(',');
+        const url = multipleCountriesUrl.replace(':query', queryString);
+        const response = await fetch(url);
+        const results = await response.json();
+        results.forEach(country => {
+            country['name'] = country['country'];
+        });
+        setOceaniaCountriesResponse(results);
+    } catch (error) {
+        throw new Error(error);
+    }
 }
 
-export const fetchAfricaPageData = async(setTypeResponse, setTotalResponse) => {
-    await Promise.all([fetchAfricaCountriesResponse(setTypeResponse), 
-        fetchAfricaResponse(setTotalResponse)]);
+export const fetchOceaniaHistoricalData = async(setOceaniaHistoricalResponse) => {
+    try {
+        let oceaniaHistoricalResults = {
+            'timeline': {
+                'cases': {},
+                'deaths': {},
+                'recovered': {}
+            }
+        };
+        const queryString = oceaniaCountries.map(country => {
+            return (country.alpha3Code || country.alpha2Code || country.name);
+        }).join(',');
+        const url = historicalDataCountryUrl.replace(':query', queryString);
+        const response = await fetch(url);
+        const results = await response.json();
+        results.forEach(country => {
+            if (country.timeline) {
+                for (const [dataDate, cases] of Object.entries(country.timeline.cases)) {
+                    oceaniaHistoricalResults.timeline.cases[dataDate] ? oceaniaHistoricalResults.timeline.cases[dataDate] += cases : oceaniaHistoricalResults.timeline.cases[dataDate] = cases;
+                }
+                for (const [dataDate, deaths] of Object.entries(country.timeline.deaths)) {
+                    oceaniaHistoricalResults.timeline.deaths[dataDate] ? oceaniaHistoricalResults.timeline.deaths[dataDate] += deaths : oceaniaHistoricalResults.timeline.deaths[dataDate] = deaths;
+                }
+                for (const [dataDate, recovered] of Object.entries(country.timeline.recovered)) {
+                    oceaniaHistoricalResults.timeline.recovered[dataDate] ? oceaniaHistoricalResults.timeline.recovered[dataDate] += recovered : oceaniaHistoricalResults.timeline.recovered[dataDate] = recovered;
+                }
+            }
+        });
+        setOceaniaHistoricalResponse(oceaniaHistoricalResults);
+    } catch (error) {
+        throw new Error(error);
+    }
 }
 
-export const fetchSouthAmericaResponse = async(setSouthAmericaResponse) => {
-    const url = continent_url.replace(':query', 'South America');
-    const response = await fetch(url);
-    const results = await response.json();
-    setSouthAmericaResponse(results);
+export const fetchOceaniaHomePageData = async(setTypeResponse, setTotalResponse) => {
+    try {
+        await Promise.all([fetchOceaniaCountriesData(setTypeResponse), fetchOceaniaData(setTotalResponse)]);
+    } catch (error) {
+        throw new Error(error);
+    }
 }
 
-export const fetchSouthAmericaCountriesResponse = async(setSouthAmericaCountriesResponse) => {
-    let queryString = southAmericaCountries.map(country => {
-        return (country.code || country.country);
-    }).join(',');
-    const url = multipleCountriesUrl.replace(':query', queryString);
-    const response = await fetch(url);
-    const results = await response.json();
-    results.forEach(country => {
-        country['name'] = country['country'];
-    });
-    setSouthAmericaCountriesResponse(results);
+export const fetchAfricaData = async(setAfricaResponse) => {
+    try {
+        const url = continent_url.replace(':query', 'Africa');
+        const response = await fetch(url);
+        const results = await response.json();
+        setAfricaResponse(results);
+    } catch (error) {
+        throw new Error(error);
+    }
 }
 
-export const fetchSouthAmericaPageData = async(setTypeResponse, setTotalResponse) => {
-    await Promise.all([fetchSouthAmericaCountriesResponse(setTypeResponse), 
-        fetchSouthAmericaResponse(setTotalResponse)]);
+export const fetchAfricaCountriesData = async(setAfricaCountriesResponse) => {
+    try {
+        let queryString = africaCountries.map(country => {
+            return (country.alpha3Code || country.alpha2Code || country.name);
+        }).join(',');
+        const url = multipleCountriesUrl.replace(':query', queryString);
+        const response = await fetch(url);
+        const results = await response.json();
+        results.forEach(country => {
+            country['name'] = country['country'];
+        });
+        setAfricaCountriesResponse(results);
+    } catch (error) {
+        throw new Error(error);
+    }
 }
 
-export const fetchHomePageData = async(setCountriesResponse, setGlobalResponse, 
-    setUsaResponse, setUsaStatesResponse, setCanadaResponse, setCanadaProvincesResponse, 
-    setEuropeResponse, setEuropeCountriesResponse, setAsiaResponse, setAsiaCountriesResponse, 
-    setOceaniaResponse, setOceaniaCountriesResponse, setAfricaResponse, 
-    setAfricaCountriesResponse, setSouthAmericaResponse, setSouthAmericaCountriesResponse) => {
-    await Promise.all([fetchGlobalPageData(setCountriesResponse, setGlobalResponse), 
-        fetchUsaPageData(setUsaStatesResponse, setUsaResponse), 
-        fetchCanadaPageData(setCanadaProvincesResponse, setCanadaResponse), 
-        fetchEuropePageData(setEuropeCountriesResponse, setEuropeResponse), 
-        fetchAsiaPageData(setAsiaCountriesResponse, setAsiaResponse), 
-        fetchOceaniaPageData(setOceaniaCountriesResponse, setOceaniaResponse), 
-        fetchAfricaPageData(setAfricaCountriesResponse, setAfricaResponse), 
-        fetchSouthAmericaPageData(setSouthAmericaCountriesResponse, setSouthAmericaResponse)]);
+export const fetchAfricaHistoricalData = async(setAfricaHistoricalResponse) => {
+    try {
+        let africaHistoricalResults = {
+            'timeline': {
+                'cases': {},
+                'deaths': {},
+                'recovered': {}
+            }
+        };
+        const queryString = africaCountries.map(country => {
+            return (country.alpha3Code || country.alpha2Code || country.name);
+        }).join(',');
+        const url = historicalDataCountryUrl.replace(':query', queryString);
+        const response = await fetch(url);
+        const results = await response.json();
+        results.forEach(country => {
+            if (country.timeline) {
+                for (const [dataDate, cases] of Object.entries(country.timeline.cases)) {
+                    africaHistoricalResults.timeline.cases[dataDate] ? africaHistoricalResults.timeline.cases[dataDate] += cases : africaHistoricalResults.timeline.cases[dataDate] = cases;
+                }
+                for (const [dataDate, deaths] of Object.entries(country.timeline.deaths)) {
+                    africaHistoricalResults.timeline.deaths[dataDate] ? africaHistoricalResults.timeline.deaths[dataDate] += deaths : africaHistoricalResults.timeline.deaths[dataDate] = deaths;
+                }
+                for (const [dataDate, recovered] of Object.entries(country.timeline.recovered)) {
+                    africaHistoricalResults.timeline.recovered[dataDate] ? africaHistoricalResults.timeline.recovered[dataDate] += recovered : africaHistoricalResults.timeline.recovered[dataDate] = recovered;
+                }
+            }
+        });
+        setAfricaHistoricalResponse(africaHistoricalResults);
+    } catch (error) {
+        throw new Error(error);
+    }
+}
+
+export const fetchAfricaHomePageData = async(setTypeResponse, setTotalResponse) => {
+    try {
+        await Promise.all([fetchAfricaCountriesData(setTypeResponse), fetchAfricaData(setTotalResponse)]);
+    } catch (error) {
+        throw new Error(error);
+    } 
+}
+
+export const fetchSouthAmericaData = async(setSouthAmericaResponse) => {
+    try {
+        const url = continent_url.replace(':query', 'South America');
+        const response = await fetch(url);
+        const results = await response.json();
+        setSouthAmericaResponse(results);
+    } catch (error) {
+        throw new Error(error);
+    }
+}
+
+export const fetchSouthAmericaCountriesData = async(setSouthAmericaCountriesResponse) => {
+    try {
+        let queryString = southAmericaCountries.map(country => {
+            return (country.alpha3Code || country.alpha2Code || country.name);
+        }).join(',');
+        const url = multipleCountriesUrl.replace(':query', queryString);
+        const response = await fetch(url);
+        const results = await response.json();
+        results.forEach(country => {
+            country['name'] = country['country'];
+        });
+        setSouthAmericaCountriesResponse(results);
+    } catch (error) {
+        throw new Error(error);
+    }
+}
+
+export const fetchSouthAmericaHistoricalData = async(setSouthAmericaHistoricalResponse) => {
+    try {
+        let southAmericaHistoricalResults = {
+            'timeline': {
+                'cases': {},
+                'deaths': {},
+                'recovered': {}
+            }
+        };
+        const queryString = southAmericaCountries.map(country => {
+            return (country.alpha3Code || country.alpha2Code || country.name);
+        }).join(',');
+        const url = historicalDataCountryUrl.replace(':query', queryString);
+        const response = await fetch(url);
+        const results = await response.json();
+        results.forEach(country => {
+            if (country.timeline) {
+                for (const [dataDate, cases] of Object.entries(country.timeline.cases)) {
+                    southAmericaHistoricalResults.timeline.cases[dataDate] ? southAmericaHistoricalResults.timeline.cases[dataDate] += cases : southAmericaHistoricalResults.timeline.cases[dataDate] = cases;
+                }
+                for (const [dataDate, deaths] of Object.entries(country.timeline.deaths)) {
+                    southAmericaHistoricalResults.timeline.deaths[dataDate] ? southAmericaHistoricalResults.timeline.deaths[dataDate] += deaths : southAmericaHistoricalResults.timeline.deaths[dataDate] = deaths;
+                }
+                for (const [dataDate, recovered] of Object.entries(country.timeline.recovered)) {
+                    southAmericaHistoricalResults.timeline.recovered[dataDate] ? southAmericaHistoricalResults.timeline.recovered[dataDate] += recovered : southAmericaHistoricalResults.timeline.recovered[dataDate] = recovered;
+                }
+            }
+        });
+        setSouthAmericaHistoricalResponse(southAmericaHistoricalResults);
+    } catch (error) {
+        throw new Error(error);
+    }
+}
+
+export const fetchSouthAmericaHomePageData = async(setTypeResponse, setTotalResponse) => {
+    try {
+        await Promise.all([fetchSouthAmericaCountriesData(setTypeResponse), fetchSouthAmericaData(setTotalResponse)]);
+    } catch (error) {
+        throw new Error(error);
+    }
 }
