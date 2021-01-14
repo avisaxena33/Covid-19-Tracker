@@ -2,12 +2,16 @@ import { fetchGlobalHomePageData, fetchUsaHomePageData, fetchCanadaHomePageData,
 fetchOceaniaHomePageData, fetchAfricaHomePageData, fetchSouthAmericaHomePageData } from '../utils/fetchCovidData';
 
 import { fetchUsaData, fetchUsaStatesData, fetchUsaHistoricalData,
-fetchCanadaData, fetchCanadaProvinceData, fetchCanadaHistoricalData, 
+fetchCanadaData, fetchAllCanadaProvinceData, fetchCanadaHistoricalData, 
 fetchEuropeData, fetchEuropeCountriesData, fetchEuropeHistoricalData,
 fetchAsiaData, fetchAsiaCountriesData, fetchAsiaHistoricalData,
 fetchOceaniaData, fetchOceaniaCountriesData, fetchOceaniaHistoricalData,
 fetchAfricaData, fetchAfricaCountriesData, fetchAfricaHistoricalData,
 fetchSouthAmericaData, fetchSouthAmericaCountriesData, fetchSouthAmericaHistoricalData } from '../utils/fetchCovidData';
+
+import { fetchCountryData, fetchCountryHistoricalData,
+fetchCanadaProvinceData, fetchCanadaProvinceHistoricalData,
+fetchUsaStateData, fetchUsaStateHistoricalData } from '../utils/fetchCovidData';
 
 /*
     Calls a bunch of fetches to grab all the data needed to render the home page and sets all the according states.
@@ -18,7 +22,7 @@ export const fetchHomePageData = async(setCountriesResponse, setGlobalResponse,
     setOceaniaResponse, setOceaniaCountriesResponse, setAfricaResponse, 
     setAfricaCountriesResponse, setSouthAmericaResponse, setSouthAmericaCountriesResponse) => {
     try {
-        await Promise.all([fetchGlobalHomePageData(setCountriesResponse, setGlobalResponse), 
+        await Promise.allSettled([fetchGlobalHomePageData(setCountriesResponse, setGlobalResponse), 
             fetchUsaHomePageData(setUsaStatesResponse, setUsaResponse), 
             fetchCanadaHomePageData(setCanadaProvincesResponse, setCanadaResponse), 
             fetchEuropeHomePageData(setEuropeCountriesResponse, setEuropeResponse), 
@@ -47,7 +51,7 @@ export const fetchUsaPageData = async(setTypeResponse, setTotalResponse, setHist
 */
 export const fetchCanadaPageData = async(setTypeResponse, setTotalResponse, setHistoricalResponse) => {
     try {
-        await Promise.all([fetchCanadaProvinceData(setTypeResponse), fetchCanadaData(setTotalResponse), fetchCanadaHistoricalData(setHistoricalResponse)]);
+        await Promise.all([fetchAllCanadaProvinceData(setTypeResponse), fetchCanadaData(setTotalResponse), fetchCanadaHistoricalData(setHistoricalResponse)]);
     } catch (error) {
         throw new Error(error);
     }
@@ -107,3 +111,37 @@ export const fetchSouthAmericaPageData = async(setTypeResponse, setTotalResponse
         throw new Error(error);
     }
 }
+
+/*
+    Fetches page data for a specific country
+*/
+export const fetchCountryPageData = async(areaIsoCode, setTotalResponse, setHistoricalResponse) => {
+    try {
+        await Promise.all([fetchCountryData(areaIsoCode, setTotalResponse), fetchCountryHistoricalData(areaIsoCode, setHistoricalResponse)]); 
+    } catch (error) {
+        throw new Error(error);
+    }
+ }
+
+ /*
+    Fetches page data for a specific country
+*/
+export const fetchCanadaProvincePageData = async(areaName, setTotalResponse, setHistoricalResponse) => {
+    try {
+        await Promise.all([fetchCanadaProvinceData(areaName, setTotalResponse), fetchCanadaProvinceHistoricalData(areaName, setHistoricalResponse)]); 
+    } catch (error) {
+        throw new Error(error);
+    }
+ }
+
+ /*
+    Fetches page data for a specific country
+*/
+export const fetchUsaStatePageData = async(areaName, setTotalResponse, setHistoricalResponse) => {
+    try {
+        await Promise.all([fetchUsaStateData(areaName, setTotalResponse), fetchUsaStateHistoricalData(areaName, setHistoricalResponse)]); 
+    } catch (error) {
+        throw new Error(error);
+    }
+ }
+ 

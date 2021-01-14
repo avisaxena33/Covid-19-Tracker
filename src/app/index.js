@@ -1,7 +1,8 @@
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 // Component imports
 import Home from "../components/Home";
-import CountryDetailPage from "../components/CountryDetailPage";
+import RegionDetailPage from "../components/RegionDetailPage";
+import AreaDetailPage from "../components/AreaDetailPage";
 
 const App = () => {
 
@@ -11,7 +12,8 @@ const App = () => {
         <Route exact path="/">
           <Home />
         </Route>
-        <Route exact path="/:type/:countryName" children={<CountryDetailPage />}></Route>
+        <Route exact path="/Region/:regionType/:regionIsoCode/:regionName" children={<RegionDetailPage />}></Route>
+        <Route exact path="/Area/:areaType/:areaIsoCode/:areaName" children={<AreaDetailPage />}></Route>
         <Route path="*">
           <Home />
         </Route>

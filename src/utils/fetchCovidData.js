@@ -8,11 +8,15 @@ const all_countries_url = 'https://corona.lmao.ninja/v2/countries?yesterday&sort
 const global_url = 'https://corona.lmao.ninja/v2/all?yesterday';
 const usa_states_url = 'https://corona.lmao.ninja/v2/states?sort&yesterday';
 const usa_url = 'https://corona.lmao.ninja/v2/countries/USA?yesterday=true&strict=true&query';
+const usaStateUrl = 'https://corona.lmao.ninja/v2/states/:states?yesterday=true';
 const canada_url = 'https://corona.lmao.ninja/v2/countries/Canada?yesterday=true&strict=true&query';
 const jhu_url = 'https://corona.lmao.ninja/v2/jhucsse';
 const continent_url = 'https://corona.lmao.ninja/v2/continents/:query?yesterday&strict';
 const multipleCountriesUrl = 'https://corona.lmao.ninja/v2/countries/:query?yesterday';
+const countryUrl = 'https://corona.lmao.ninja/v2/countries/:query?yesterday=true&strict=true&query';
 const historicalDataCountryUrl = 'https://corona.lmao.ninja/v2/historical/:query?lastdays=all';
+const historicalDataProvinceUrl = 'https://corona.lmao.ninja/v2/historical/:query/:province?lastdays';
+const historicalDataUsaStateUrl = 'https://corona.lmao.ninja/v2/historical/usacounties/:state?lastdays=30';
 
 export const fetchAllCountriesData = async(setCountriesResponse) => {
     try {
@@ -97,7 +101,7 @@ export const fetchCanadaData = async(setCanadaResponse) => {
     }
 }
 
-export const fetchCanadaProvinceData = async(setCanadaProvincesResponse) => {
+export const fetchAllCanadaProvinceData = async(setCanadaProvincesResponse) => {
     try {
         const response = await fetch(jhu_url);
         const results = await response.json();
@@ -130,7 +134,7 @@ export const fetchCanadaHistoricalData = async(setCanadaHistoricalResponse) => {
 
 export const fetchCanadaHomePageData = async(setTypeResponse, setTotalResponse) => {
     try {
-        await Promise.all([fetchCanadaProvinceData(setTypeResponse), fetchCanadaData(setTotalResponse)]);
+        await Promise.all([fetchAllCanadaProvinceData(setTypeResponse), fetchCanadaData(setTotalResponse)]);
     } catch (error) {
         throw new Error(error);
     }
@@ -481,6 +485,104 @@ export const fetchSouthAmericaHistoricalData = async(setSouthAmericaHistoricalRe
 export const fetchSouthAmericaHomePageData = async(setTypeResponse, setTotalResponse) => {
     try {
         await Promise.all([fetchSouthAmericaCountriesData(setTypeResponse), fetchSouthAmericaData(setTotalResponse)]);
+    } catch (error) {
+        throw new Error(error);
+    }
+}
+
+export const fetchCountryData = async(areaIsoCode, setTotalResponse) => {
+    try {
+        const url = countryUrl.replace(':query', areaIsoCode);
+        const response = await fetch(url);
+        const results = await response.json();
+        results['name'] = results['country'];
+        setTotalResponse(results);
+    } catch (error) {
+        throw new Error(error);
+    }
+}
+
+export const fetchCountryHistoricalData = async(areaIsoCode, setHistoricalResponse) => {
+    try {
+        const url = historicalDataCountryUrl.replace(':query', areaIsoCode);
+        const response = await fetch(url);
+        const results = await response.json();
+        results['name'] = results['country'];
+        setHistoricalResponse(results);
+    } catch (error) {
+        throw new Error(error);
+    }
+}
+
+export const fetchCanadaProvinceData = async(areaName, setTotalResponse) => {
+    try {
+        const response = await fetch(jhu_url);
+        const results = await response.json();
+        let prov = {};
+        results.forEach(province => {
+            if (province.country === 'Canada' && province.province === areaName) {
+                province['name'] = province['province'];
+                province['cases'] = province['stats']['confirmed'];
+                province['deaths'] = province['stats']['deaths'];
+                province['recovered'] = province['stats']['recovered'];
+                prov = province;
+            }
+        });
+        setTotalResponse(prov);
+    } catch (error) {
+        throw new Error(error);
+    }
+}
+
+export const fetchCanadaProvinceHistoricalData = async(areaName, setHistoricalResponse) => {
+    try {
+        const tmpUrl = historicalDataProvinceUrl.replace(':query', 'CAN');
+        const url = tmpUrl.replace(':province', areaName);
+        const response = await fetch(url);
+        const results = await response.json();
+        results['name'] = results['province'];
+        setHistoricalResponse(results);
+    } catch (error) {
+        throw new Error(error);
+    }
+}
+
+export const fetchUsaStateData = async(areaName, setTotalResponse) => {
+    try {
+        const url = usaStateUrl.replace(':states', areaName);
+        const response = await fetch(url);
+        const results = await response.json();
+        results['name'] = results['state'];
+        setTotalResponse(results);
+    } catch (error) {
+        throw new Error(error);
+    }
+}
+
+export const fetchUsaStateHistoricalData = async(areaName, setHistoricalResponse) => {
+    try {
+        areaName = areaName.toLowerCase();
+        const url = historicalDataUsaStateUrl.replace(':state', areaName);
+        const response = await fetch(url);
+        const results = await response.json();
+        let usaStateHistoricalResults = {
+            'timeline': {
+                'cases': {},
+                'deaths': {},
+                'recovered': {}
+            }
+        }; 
+        results.forEach(county => {
+            if (county.timeline) {
+                for (const [dataDate, cases] of Object.entries(county.timeline.cases)) {
+                    usaStateHistoricalResults.timeline.cases[dataDate] ? usaStateHistoricalResults.timeline.cases[dataDate] += cases : usaStateHistoricalResults.timeline.cases[dataDate] = cases;
+                }
+                for (const [dataDate, deaths] of Object.entries(county.timeline.deaths)) {
+                    usaStateHistoricalResults.timeline.deaths[dataDate] ? usaStateHistoricalResults.timeline.deaths[dataDate] += deaths : usaStateHistoricalResults.timeline.deaths[dataDate] = deaths;
+                }
+            }
+        });
+        setHistoricalResponse(usaStateHistoricalResults);
     } catch (error) {
         throw new Error(error);
     }

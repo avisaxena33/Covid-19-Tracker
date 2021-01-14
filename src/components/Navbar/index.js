@@ -39,13 +39,13 @@ const MainNavbar = () => {
                         onClose={handleClose}
                     >
                         <MenuItem component={Link} to="/" onClick={handleClose}>World</MenuItem>
-                        <MenuItem component={Link} to="/State/USA" onClick={handleClose}>USA</MenuItem>
-                        <MenuItem component={Link} to="/Country/Canada" onClick={handleClose}>Canada</MenuItem>
-                        <MenuItem component={Link} to="/Country/Europe" onClick={handleClose}>Europe</MenuItem>
-                        <MenuItem component={Link} to="/Country/Asia" onClick={handleClose}>Asia</MenuItem>
-                        <MenuItem component={Link} to="/Country/Oceania" onClick={handleClose}>Oceania</MenuItem>
-                        <MenuItem component={Link} to="/Country/Africa" onClick={handleClose}>Africa</MenuItem>
-                        <MenuItem component={Link} to="/Country/South America"  onClick={handleClose}>South America</MenuItem>
+                        <MenuItem component={Link} to="/Region/Country/USA/United States" onClick={handleClose}>USA</MenuItem>
+                        <MenuItem component={Link} to="/Region/Country/CAN/Canada" onClick={handleClose}>Canada</MenuItem>
+                        <MenuItem component={Link} to="/Region/Continent/Europe/Europe" onClick={handleClose}>Europe</MenuItem>
+                        <MenuItem component={Link} to="/Region/Continent/Asia/Asia" onClick={handleClose}>Asia</MenuItem>
+                        <MenuItem component={Link} to="/Region/Continent/Oceania/Oceania" onClick={handleClose}>Oceania</MenuItem>
+                        <MenuItem component={Link} to="/Region/Continent/Africa/Africa" onClick={handleClose}>Africa</MenuItem>
+                        <MenuItem component={Link} to="/Region/Continent/South America/South America"  onClick={handleClose}>South America</MenuItem>
                     </Menu>
                 </div>
             </div>

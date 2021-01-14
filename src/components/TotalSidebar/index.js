@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './index.css'
-import numberWithCommas from '../../utils/formatters';
+import { numberWithCommas } from '../../utils/formatters';
 import { fetchGlobalData } from '../../utils/fetchCovidData';
 
 const TotalSidebar = () => {

@@ -8,36 +8,44 @@ import Navbar from "../Navbar";
 import { fetchUsaPageData, fetchCanadaPageData, fetchEuropePageData, fetchAsiaPageData, 
     fetchOceaniaPageData, fetchSouthAmericaPageData, fetchAfricaPageData } from '../../utils/mainApi';
 
-const CountryDetailPage = () => {
-    const { type, countryName } = useParams();
-    const title = countryName.concat(' ').concat('Statistics');
+const RegionDetailPage = () => {
+    const { regionType, regionIsoCode, regionName } = useParams();
+    const title = regionName.concat(' ').concat('Statistics');
 
+    const [denominationType, setDenominationType] = useState('');
     const [typeResponse, setTypeResponse] = useState({});
     const [totalResponse, setTotalResponse] = useState({});
     const [historicalResponse, setHistoricalResponse] = useState({});
     const [isLoading, setIsLoading] = useState(true);
 
-    const fetchCorrectData = async(countryName) => {
-        switch (countryName) {
-            case 'USA':
+    const fetchCorrectData = async(regionName) => {
+        switch (regionName) {
+            case 'United States':
+                setDenominationType('State');
                 await fetchUsaPageData(setTypeResponse, setTotalResponse, setHistoricalResponse);
                 break;
             case 'Canada':
+                setDenominationType('Province');
                 await fetchCanadaPageData(setTypeResponse, setTotalResponse, setHistoricalResponse);
                 break;
             case 'Europe':
+                setDenominationType('Country');
                 await fetchEuropePageData(setTypeResponse, setTotalResponse, setHistoricalResponse);
                 break;
             case 'Asia':
+                setDenominationType('Country');
                 await fetchAsiaPageData(setTypeResponse, setTotalResponse, setHistoricalResponse);
                 break;
             case 'Oceania':
+                setDenominationType('Country');
                 await fetchOceaniaPageData(setTypeResponse, setTotalResponse, setHistoricalResponse);
                 break;
             case 'Africa':
+                setDenominationType('Country');
                 await fetchAfricaPageData(setTypeResponse, setTotalResponse, setHistoricalResponse);
                 break;
             case 'South America':
+                setDenominationType('Country');
                 await fetchSouthAmericaPageData(setTypeResponse, setTotalResponse, setHistoricalResponse);
                 break;
             default:
@@ -47,11 +55,11 @@ const CountryDetailPage = () => {
 
     useEffect(() => {
         const fetchAllData = async() => {
-            await fetchCorrectData(countryName);            
-            await setIsLoading(false);
+            await fetchCorrectData(regionName);            
+            setIsLoading(false);
         }
         fetchAllData();
-    }, [countryName])
+    }, [regionName]);
 
     if (isLoading) {
         return (
@@ -72,7 +80,7 @@ const CountryDetailPage = () => {
                         <TotalSidebar />
                     </div>
                     <div className="data__tables">
-                        <StatsTable typeData={typeResponse} totalData={totalResponse} title={title} type={type} />
+                        <StatsTable typeData={typeResponse} totalData={totalResponse} title={title} denominationType={denominationType} />
                         <HistoricalChart data={historicalResponse} />
                     </div>
                 </div>
@@ -81,4 +89,4 @@ const CountryDetailPage = () => {
     )
 };
 
-export default CountryDetailPage;
+export default RegionDetailPage;

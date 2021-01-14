@@ -1,9 +1,17 @@
 import React, { useState, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 import './index.css';
-import numberWithCommas from '../../utils/formatters';
+import { numberWithCommas, fetchAreaUrl } from '../../utils/formatters';
 
-const StatsTable = ({ typeData, totalData, title, type }) => {
+const StatsTable = ({ typeData, totalData, title, denominationType, regionName, regionType, regionIsoCode }) => {
     const [searchText, setSearchText] = useState('');
+    let history = useHistory();
+
+    const navigateToArea = async(regionData, areaName) => {
+        const regName = regionName || regionData.continent;
+        const areaUrl = await fetchAreaUrl(areaName, denominationType, regName);
+        history.push(areaUrl);
+    }
 
     useEffect(() => {
         const applyFilters = () => {
@@ -35,7 +43,7 @@ const StatsTable = ({ typeData, totalData, title, type }) => {
                 <div className="country__table__scroll">
                     <table id={title}>
                         <tr>
-                            <th>{type}</th>
+                            <th>{denominationType}</th>
                             <th>Total Cases</th>
                             <th>Cases Today</th>
                             <th>Cases Per Million</th>
@@ -60,13 +68,13 @@ const StatsTable = ({ typeData, totalData, title, type }) => {
                             <td className="recovered__color">{numberWithCommas(totalData.recovered)}</td>
                             <td className="critical__color">{numberWithCommas(totalData.critical)}</td>
                         </tr>
-                        {typeData.map((type, index) => {
+                        {typeData && typeData.map((type, index) => {
                             return (
                                 <React.Fragment key={index}>
                                     <tr>
                                         <td className="flag__container">
                                             {type.countryInfo && type.countryInfo.flag && <img src={type.countryInfo.flag} className="flag" alt="hello"></img>}
-                                            <h3 className="swag">{type.name || type.state || type.province}</h3>
+                                            <h3 className="swag" onClick={() => navigateToArea(type, type.name || type.state || type.province)}>{type.name || type.state || type.province}</h3>
                                         </td>
                                         <td className="cases__color">{type.cases || type.cases === 0 ? numberWithCommas(type.cases) : 'Unknown'}</td>
                                         <td className="cases__color">{type.todayCases || type.todayCases === 0  ? numberWithCommas(type.todayCases) : 'Unknown'}</td>

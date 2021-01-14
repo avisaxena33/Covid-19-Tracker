@@ -27,13 +27,17 @@ const Home = () => {
     const [isLoading, setIsLoading] = useState(true);
 
     const fetchAllData = async() => {
-        await fetchHomePageData(setCountriesResponse, setGlobalResponse, setUsaResponse, 
-            setUsaStatesResponse, setCanadaResponse, setCanadaProvincesResponse, 
-            setEuropeResponse, setEuropeCountriesResponse, setAsiaResponse, 
-            setAsiaCountriesResponse, setOceaniaResponse, setOceaniaCountriesResponse, 
-            setAfricaResponse, setAfricaCountriesResponse, setSouthAmericaResponse, 
-            setSouthAmericaCountriesResponse);
-        await setIsLoading(false);
+        try {
+            await fetchHomePageData(setCountriesResponse, setGlobalResponse, setUsaResponse, 
+                setUsaStatesResponse, setCanadaResponse, setCanadaProvincesResponse, 
+                setEuropeResponse, setEuropeCountriesResponse, setAsiaResponse, 
+                setAsiaCountriesResponse, setOceaniaResponse, setOceaniaCountriesResponse, 
+                setAfricaResponse, setAfricaCountriesResponse, setSouthAmericaResponse, 
+                setSouthAmericaCountriesResponse);
+            setIsLoading(false);
+        } catch (error) {
+            console.log(error);
+        }
     }
 
     useEffect(() => {
@@ -59,14 +63,14 @@ const Home = () => {
                         <TotalSidebar />
                     </div>
                     <div className="data__tables">
-                        <StatsTable typeData={countriesResponse} totalData={globalResponse} title='World Statistics' type='Country' />
-                        <StatsTable typeData={usaStatesResponse} totalData={usaResponse} title='USA Statistics'  type='State' />
-                        <StatsTable typeData={canadaProvincesResponse} totalData={canadaResponse} title='Canada Statistics' type='Province' />
-                        <StatsTable typeData={europeCountriesResponse} totalData={europeResponse} title='Europe Statistics' type='Country' />
-                        <StatsTable typeData={asiaCountriesResponse} totalData={asiaResponse} title='Asia Statistics' type='Country' />
-                        <StatsTable typeData={oceaniaCountriesResponse} totalData={oceaniaResponse} title='Oceania Statistics' type='Country' />
-                        <StatsTable typeData={africaCountriesResponse} totalData={africaResponse} title='Africa Statistics' type='Country' />
-                        <StatsTable typeData={southAmericaCountriesResponse} totalData={southAmericaResponse} title='South America Statistics' type='Country' />
+                        <StatsTable typeData={countriesResponse} totalData={globalResponse} title='World Statistics' denominationType='Country' />
+                        <StatsTable typeData={usaStatesResponse} totalData={usaResponse} title='United States Statistics'  denominationType='State' regionType='Country' regionIsoCode='USA' regionName='United States' />
+                        <StatsTable typeData={canadaProvincesResponse} totalData={canadaResponse} title='Canada Statistics' denominationType='Province' regionType='Country' regionIsoCode='CAN' regionName='Canada' />
+                        <StatsTable typeData={europeCountriesResponse} totalData={europeResponse} title='Europe Statistics' denominationType='Country' regionType='Continent' regionIsoCode='Europe' regionName='Europe' />
+                        <StatsTable typeData={asiaCountriesResponse} totalData={asiaResponse} title='Asia Statistics' denominationType='Country' regionType='Continent' regionIsoCode='Asia' regionName='Asia' />
+                        <StatsTable typeData={oceaniaCountriesResponse} totalData={oceaniaResponse} title='Oceania Statistics' denominationType='Country' regionType='Continent' regionIsoCode='Oceania' regionName='Oceania' />
+                        <StatsTable typeData={africaCountriesResponse} totalData={africaResponse} title='Africa Statistics' denominationType='Country' regionType='Continent' regionIsoCode='Africa' regionName='Africa' />
+                        <StatsTable typeData={southAmericaCountriesResponse} totalData={southAmericaResponse} title='South America Statistics' denominationType='Country' regionType='Continent' regionIsoCode='South America' regionName='South America' />
                     </div>
                 </div>
             </div>
