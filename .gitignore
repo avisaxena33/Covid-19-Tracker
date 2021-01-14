@@ -11,6 +11,9 @@
 # production
 /build
 
+# python env
+covidenv/
+
 # misc
 .DS_Store
 .env.local

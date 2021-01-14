@@ -3,6 +3,7 @@ import asiaCountries from '../data/asianCountries';
 import oceaniaCountries from '../data/oceaniaCountries';
 import africaCountries from '../data/africanCountries';
 import southAmericaCountries from '../data/southAmericaCountries';
+import northAmericaCountries from '../data/northAmericaCountries';
 
 const all_countries_url = 'https://corona.lmao.ninja/v2/countries?yesterday&sort';
 const global_url = 'https://corona.lmao.ninja/v2/all?yesterday';
@@ -197,6 +198,76 @@ export const fetchEuropeHistoricalData = async(setEuropeHistoricalResponse) => {
             }
         });
         setEuropeHistoricalResponse(europeHistoricalResults);
+    } catch (error) {
+        throw new Error(error);
+    }
+}
+
+export const fetchNorthAmericaData = async(setNorthAmericaResponse) => {
+    try {
+        const url = continent_url.replace(':query', 'North America');
+        const response = await fetch(url);
+        const results = await response.json();
+        setNorthAmericaResponse(results);
+    } catch (error) {
+        throw new Error(error);
+    }
+}
+
+export const fetchNorthAmericaCountriesData = async(setNorthAmericaCountriesResponse) => {
+    try {
+        let queryString = northAmericaCountries.map(country => {
+            return (country.alpha3Code || country.alpha2Code || country.name);
+        }).join(',');
+        const url = multipleCountriesUrl.replace(':query', queryString);
+        const response = await fetch(url);
+        const results = await response.json();
+        results.forEach(country => {
+            country['name'] = country['country'];
+        });
+        setNorthAmericaCountriesResponse(results);
+    } catch (error) {
+        throw new Error(error);
+    }
+}
+
+export const fetchNorthAmericaHistoricalData = async(setNorthAmericaHistoricalResponse) => {
+    try {
+        let northAmericaHistoricalResults = {
+            'timeline': {
+                'cases': {},
+                'deaths': {},
+                'recovered': {}
+            }
+        };
+        const queryString = northAmericaCountries.map(country => {
+            return (country.alpha3Code || country.alpha2Code || country.name);
+        }).join(',');
+        const url = historicalDataCountryUrl.replace(':query', queryString);
+        const response = await fetch(url);
+        const results = await response.json();
+        results.forEach(country => {
+            if (country.timeline) {
+                for (const [dataDate, cases] of Object.entries(country.timeline.cases)) {
+                    northAmericaHistoricalResults.timeline.cases[dataDate] ? northAmericaHistoricalResults.timeline.cases[dataDate] += cases : northAmericaHistoricalResults.timeline.cases[dataDate] = cases;
+                }
+                for (const [dataDate, deaths] of Object.entries(country.timeline.deaths)) {
+                    northAmericaHistoricalResults.timeline.deaths[dataDate] ? northAmericaHistoricalResults.timeline.deaths[dataDate] += deaths : northAmericaHistoricalResults.timeline.deaths[dataDate] = deaths;
+                }
+                for (const [dataDate, recovered] of Object.entries(country.timeline.recovered)) {
+                    northAmericaHistoricalResults.timeline.recovered[dataDate] ? northAmericaHistoricalResults.timeline.recovered[dataDate] += recovered : northAmericaHistoricalResults.timeline.recovered[dataDate] = recovered;
+                }
+            }
+        });
+        setNorthAmericaHistoricalResponse(northAmericaHistoricalResults);
+    } catch (error) {
+        throw new Error(error);
+    }
+}
+
+export const fetchNorthAmericaHomePageData = async(setTypeResponse, setTotalResponse) => {
+    try {
+        await Promise.all([fetchNorthAmericaCountriesData(setTypeResponse), fetchNorthAmericaData(setTotalResponse)]);
     } catch (error) {
         throw new Error(error);
     }

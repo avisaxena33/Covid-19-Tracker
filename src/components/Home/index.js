@@ -13,6 +13,8 @@ const Home = () => {
     const [usaResponse, setUsaResponse] = useState({});
     const [canadaResponse, setCanadaResponse] = useState({});
     const [canadaProvincesResponse, setCanadaProvincesResponse] = useState([]);
+    const [northAmericaResponse, setNorthAmericaResponse] = useState({});
+    const [northAmericaCountriesResponse, setNorthAmericaCountriesResponse] = useState([]);
     const [europeResponse, setEuropeResponse] = useState({});
     const [europeCountriesResponse, setEuropeCountriesResponse] = useState([]);
     const [asiaResponse, setAsiaResponse] = useState({});
@@ -28,12 +30,16 @@ const Home = () => {
 
     const fetchAllData = async() => {
         try {
-            await fetchHomePageData(setCountriesResponse, setGlobalResponse, setUsaResponse, 
-                setUsaStatesResponse, setCanadaResponse, setCanadaProvincesResponse, 
-                setEuropeResponse, setEuropeCountriesResponse, setAsiaResponse, 
-                setAsiaCountriesResponse, setOceaniaResponse, setOceaniaCountriesResponse, 
-                setAfricaResponse, setAfricaCountriesResponse, setSouthAmericaResponse, 
-                setSouthAmericaCountriesResponse);
+            await fetchHomePageData(
+                setCountriesResponse, setGlobalResponse, 
+                setUsaResponse, setUsaStatesResponse, 
+                setCanadaResponse, setCanadaProvincesResponse,
+                setNorthAmericaResponse, setNorthAmericaCountriesResponse, 
+                setEuropeResponse, setEuropeCountriesResponse, 
+                setAsiaResponse, setAsiaCountriesResponse, 
+                setOceaniaResponse, setOceaniaCountriesResponse, 
+                setAfricaResponse, setAfricaCountriesResponse, 
+                setSouthAmericaResponse, setSouthAmericaCountriesResponse);
             setIsLoading(false);
         } catch (error) {
             console.log(error);
@@ -66,6 +72,7 @@ const Home = () => {
                         <StatsTable typeData={countriesResponse} totalData={globalResponse} title='World Statistics' denominationType='Country' />
                         <StatsTable typeData={usaStatesResponse} totalData={usaResponse} title='United States Statistics'  denominationType='State' regionType='Country' regionIsoCode='USA' regionName='United States' />
                         <StatsTable typeData={canadaProvincesResponse} totalData={canadaResponse} title='Canada Statistics' denominationType='Province' regionType='Country' regionIsoCode='CAN' regionName='Canada' />
+                        <StatsTable typeData={northAmericaCountriesResponse} totalData={northAmericaResponse} title='North America Statistics' denominationType='Country' regionType='Continent' regionIsoCode='North America' regionName='North America' />
                         <StatsTable typeData={europeCountriesResponse} totalData={europeResponse} title='Europe Statistics' denominationType='Country' regionType='Continent' regionIsoCode='Europe' regionName='Europe' />
                         <StatsTable typeData={asiaCountriesResponse} totalData={asiaResponse} title='Asia Statistics' denominationType='Country' regionType='Continent' regionIsoCode='Asia' regionName='Asia' />
                         <StatsTable typeData={oceaniaCountriesResponse} totalData={oceaniaResponse} title='Oceania Statistics' denominationType='Country' regionType='Continent' regionIsoCode='Oceania' regionName='Oceania' />

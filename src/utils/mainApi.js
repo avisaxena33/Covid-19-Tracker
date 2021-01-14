@@ -1,30 +1,51 @@
-import { fetchGlobalHomePageData, fetchUsaHomePageData, fetchCanadaHomePageData, fetchEuropeHomePageData, fetchAsiaHomePageData,
-fetchOceaniaHomePageData, fetchAfricaHomePageData, fetchSouthAmericaHomePageData } from '../utils/fetchCovidData';
+import { 
+    fetchGlobalHomePageData, 
+    fetchUsaHomePageData, 
+    fetchCanadaHomePageData, 
+    fetchNorthAmericaHomePageData,
+    fetchEuropeHomePageData, 
+    fetchAsiaHomePageData,
+    fetchOceaniaHomePageData, 
+    fetchAfricaHomePageData, 
+    fetchSouthAmericaHomePageData, 
+} from '../utils/fetchCovidData';
 
-import { fetchUsaData, fetchUsaStatesData, fetchUsaHistoricalData,
-fetchCanadaData, fetchAllCanadaProvinceData, fetchCanadaHistoricalData, 
-fetchEuropeData, fetchEuropeCountriesData, fetchEuropeHistoricalData,
-fetchAsiaData, fetchAsiaCountriesData, fetchAsiaHistoricalData,
-fetchOceaniaData, fetchOceaniaCountriesData, fetchOceaniaHistoricalData,
-fetchAfricaData, fetchAfricaCountriesData, fetchAfricaHistoricalData,
-fetchSouthAmericaData, fetchSouthAmericaCountriesData, fetchSouthAmericaHistoricalData } from '../utils/fetchCovidData';
+import { 
+    fetchUsaData, fetchUsaStatesData, fetchUsaHistoricalData,
+    fetchCanadaData, fetchAllCanadaProvinceData, fetchCanadaHistoricalData,
+    fetchNorthAmericaData, fetchNorthAmericaCountriesData, fetchNorthAmericaHistoricalData, 
+    fetchEuropeData, fetchEuropeCountriesData, fetchEuropeHistoricalData,
+    fetchAsiaData, fetchAsiaCountriesData, fetchAsiaHistoricalData,
+    fetchOceaniaData, fetchOceaniaCountriesData, fetchOceaniaHistoricalData,
+    fetchAfricaData, fetchAfricaCountriesData, fetchAfricaHistoricalData,
+    fetchSouthAmericaData, fetchSouthAmericaCountriesData, fetchSouthAmericaHistoricalData 
+} from '../utils/fetchCovidData';
 
-import { fetchCountryData, fetchCountryHistoricalData,
-fetchCanadaProvinceData, fetchCanadaProvinceHistoricalData,
-fetchUsaStateData, fetchUsaStateHistoricalData } from '../utils/fetchCovidData';
+import { 
+    fetchCountryData, fetchCountryHistoricalData,
+    fetchCanadaProvinceData, fetchCanadaProvinceHistoricalData,
+    fetchUsaStateData, fetchUsaStateHistoricalData 
+} from '../utils/fetchCovidData';
 
 /*
     Calls a bunch of fetches to grab all the data needed to render the home page and sets all the according states.
 */
-export const fetchHomePageData = async(setCountriesResponse, setGlobalResponse, 
-    setUsaResponse, setUsaStatesResponse, setCanadaResponse, setCanadaProvincesResponse, 
-    setEuropeResponse, setEuropeCountriesResponse, setAsiaResponse, setAsiaCountriesResponse, 
-    setOceaniaResponse, setOceaniaCountriesResponse, setAfricaResponse, 
-    setAfricaCountriesResponse, setSouthAmericaResponse, setSouthAmericaCountriesResponse) => {
+export const fetchHomePageData = async(
+    setCountriesResponse, setGlobalResponse, 
+    setUsaResponse, setUsaStatesResponse, 
+    setCanadaResponse, setCanadaProvincesResponse,
+    setNorthAmericaResponse, setNorthAmericaCountriesResponse, 
+    setEuropeResponse, setEuropeCountriesResponse, 
+    setAsiaResponse, setAsiaCountriesResponse, 
+    setOceaniaResponse, setOceaniaCountriesResponse, 
+    setAfricaResponse, setAfricaCountriesResponse, 
+    setSouthAmericaResponse, setSouthAmericaCountriesResponse) => {
     try {
-        await Promise.allSettled([fetchGlobalHomePageData(setCountriesResponse, setGlobalResponse), 
+        await Promise.allSettled([
+            fetchGlobalHomePageData(setCountriesResponse, setGlobalResponse), 
             fetchUsaHomePageData(setUsaStatesResponse, setUsaResponse), 
             fetchCanadaHomePageData(setCanadaProvincesResponse, setCanadaResponse), 
+            fetchNorthAmericaHomePageData(setNorthAmericaCountriesResponse, setNorthAmericaResponse),
             fetchEuropeHomePageData(setEuropeCountriesResponse, setEuropeResponse), 
             fetchAsiaHomePageData(setAsiaCountriesResponse, setAsiaResponse), 
             fetchOceaniaHomePageData(setOceaniaCountriesResponse, setOceaniaResponse), 
@@ -52,6 +73,17 @@ export const fetchUsaPageData = async(setTypeResponse, setTotalResponse, setHist
 export const fetchCanadaPageData = async(setTypeResponse, setTotalResponse, setHistoricalResponse) => {
     try {
         await Promise.all([fetchAllCanadaProvinceData(setTypeResponse), fetchCanadaData(setTotalResponse), fetchCanadaHistoricalData(setHistoricalResponse)]);
+    } catch (error) {
+        throw new Error(error);
+    }
+}
+
+/*
+    Calls a bunch of fetches to grab all the data needed to render the North America page and sets all the according states.
+*/
+export const fetchNorthAmericaPageData = async(setTypeResponse, setTotalResponse, setHistoricalResponse) => {
+    try {
+        await Promise.all([fetchNorthAmericaCountriesData(setTypeResponse), fetchNorthAmericaData(setTotalResponse), fetchNorthAmericaHistoricalData(setHistoricalResponse)]);
     } catch (error) {
         throw new Error(error);
     }

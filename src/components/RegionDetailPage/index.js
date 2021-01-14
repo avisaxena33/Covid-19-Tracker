@@ -5,8 +5,16 @@ import StatsTable from '../StatsTable';
 import TotalSidebar from '../TotalSidebar';
 import HistoricalChart from '../HistoricalChart';
 import Navbar from "../Navbar";
-import { fetchUsaPageData, fetchCanadaPageData, fetchEuropePageData, fetchAsiaPageData, 
-    fetchOceaniaPageData, fetchSouthAmericaPageData, fetchAfricaPageData } from '../../utils/mainApi';
+import { 
+    fetchUsaPageData, 
+    fetchCanadaPageData,
+    fetchNorthAmericaPageData, 
+    fetchEuropePageData, 
+    fetchAsiaPageData, 
+    fetchOceaniaPageData, 
+    fetchSouthAmericaPageData, 
+    fetchAfricaPageData 
+} from '../../utils/mainApi';
 
 const RegionDetailPage = () => {
     const { regionType, regionIsoCode, regionName } = useParams();
@@ -27,6 +35,10 @@ const RegionDetailPage = () => {
             case 'Canada':
                 setDenominationType('Province');
                 await fetchCanadaPageData(setTypeResponse, setTotalResponse, setHistoricalResponse);
+                break;
+            case 'North America':
+                setDenominationType('Country');
+                await fetchNorthAmericaPageData(setTypeResponse, setTotalResponse, setHistoricalResponse);
                 break;
             case 'Europe':
                 setDenominationType('Country');

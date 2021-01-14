@@ -41,6 +41,7 @@ const MainNavbar = () => {
                         <MenuItem component={Link} to="/" onClick={handleClose}>World</MenuItem>
                         <MenuItem component={Link} to="/Region/Country/USA/United States" onClick={handleClose}>USA</MenuItem>
                         <MenuItem component={Link} to="/Region/Country/CAN/Canada" onClick={handleClose}>Canada</MenuItem>
+                        <MenuItem component={Link} to="/Region/Continent/North America/North America" onClick={handleClose}>North America</MenuItem>
                         <MenuItem component={Link} to="/Region/Continent/Europe/Europe" onClick={handleClose}>Europe</MenuItem>
                         <MenuItem component={Link} to="/Region/Continent/Asia/Asia" onClick={handleClose}>Asia</MenuItem>
                         <MenuItem component={Link} to="/Region/Continent/Oceania/Oceania" onClick={handleClose}>Oceania</MenuItem>
