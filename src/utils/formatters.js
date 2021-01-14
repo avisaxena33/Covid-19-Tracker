@@ -5,6 +5,7 @@ import africaCountries from '../data/africanCountries';
 import southAmericaCountries from '../data/southAmericaCountries';
 import canadianProvinces from '../data/canadianProvinces';
 import usaStates from '../data/usaStates';
+import northAmericaCountries from '../data/northAmericaCountries';
 
 /*
     Takes a number as input and returns a well formatted number string with commas
@@ -31,6 +32,13 @@ export const fetchAreaUrl = async(areaName, denominationType, regionName) => {
             canadianProvinces.forEach((province) => {
                 if (province.name === areaName) {
                     finalAreaUrl = `${areaBaseUrl}/${province.code}/${province.name}`;
+                }
+            });
+            break;
+        case 'North America':
+            northAmericaCountries.forEach((country) => {
+                if (country.name === areaName) {
+                    finalAreaUrl = `${areaBaseUrl}/${country.alpha3Code}/${country.name}`;
                 }
             });
             break;
