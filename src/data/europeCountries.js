@@ -30,7 +30,7 @@ const europeCountries = [
       "alpha3Code": "BEL"
     },
     {
-      "name": "Bosnia and Herzegovina",
+      "name": "Bosnia",
       "alpha2Code": "BA",
       "alpha3Code": "BIH"
     },

@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import './index.css';
-import { numberWithCommas, fetchAreaUrl } from '../../utils/formatters';
+import { numberWithCommas, fetchRouteUrl } from '../../utils/formatters';
 
-const StatsTable = ({ typeData, totalData, title, denominationType, regionName, regionType, regionIsoCode }) => {
+const StatsTable = ({ typeData, totalData, title, denominationType, regionName, regionOrArea }) => {
     const [searchText, setSearchText] = useState('');
     let history = useHistory();
 
-    const navigateToArea = async(regionData, areaName) => {
-        const regName = regionName || regionData.continent;
-        const areaUrl = await fetchAreaUrl(areaName, denominationType, regName);
+    const navigateToArea = async(data, name) => {
+        const regName = regionName || data.continent;
+        const areaUrl = fetchRouteUrl(name, denominationType, regName, regionOrArea);
         history.push(areaUrl);
     }
 

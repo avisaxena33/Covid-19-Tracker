@@ -10,19 +10,22 @@ const HistoricalChart = ({ data }) => {
     useEffect (() => {
         const formatData = () => {
             let tmpMap = {};
-            for (const date of Object.keys(data.timeline.cases)) {
-                tmpMap[date] = { date, 'cases': 0, 'deaths': 0, 'recovered': 0 };
+            if (data && data.timeline && (data.timeline.cases || data.timeline.deaths || data.timeline.recovered)) {
+                for (const date of Object.keys(data.timeline.cases)) {
+                    tmpMap[date] = { date, 'cases': 0, 'deaths': 0, 'recovered': 0 };
+                }
+                for (const [date, cases] of Object.entries(data.timeline.cases)) {
+                    tmpMap[date]['cases'] = cases;
+                }
+                for (const [date, deaths] of Object.entries(data.timeline.deaths)) {
+                    tmpMap[date]['deaths'] = deaths;
+                }
+                for (const [date, recovered] of Object.entries(data.timeline.recovered)) {
+                    tmpMap[date]['recovered'] = recovered;
+                }
+                setChartData(Object.values(tmpMap));
             }
-            for (const [date, cases] of Object.entries(data.timeline.cases)) {
-                tmpMap[date]['cases'] = cases;
-            }
-            for (const [date, deaths] of Object.entries(data.timeline.deaths)) {
-                tmpMap[date]['deaths'] = deaths;
-            }
-            for (const [date, recovered] of Object.entries(data.timeline.recovered)) {
-                tmpMap[date]['recovered'] = recovered;
-            }
-            setChartData(Object.values(tmpMap));
+            
         };
         formatData();
     }, [data]);
@@ -35,15 +38,15 @@ const HistoricalChart = ({ data }) => {
                     <p className="intro">{label}</p>
                     <div className="tooltipRow">
                         <div className="casesBox"></div>
-                        {payload[0] && <p>Cases: {payload[0].payload.cases}</p>}
+                        {payload && payload[0] && <p>Cases: {payload[0].payload.cases}</p>}
                     </div>
                     <div className="tooltipRow">
                         <div className="deathsBox"></div>
-                        {payload[0] && <p>Deaths: {payload[0].payload.deaths}</p>}
+                        {payload && payload[0] && <p>Deaths: {payload[0].payload.deaths}</p>}
                     </div>
                     <div className="tooltipRow">
                         <div className="recoveredBox"></div>
-                        {payload[0] && <p>Recovered: {payload[0].payload.recovered}</p>}
+                        {payload && payload[0] && <p>Recovered: {payload[0].payload.recovered}</p>}
                     </div>
                 </div>
             </>
@@ -64,8 +67,8 @@ const HistoricalChart = ({ data }) => {
                         }}
                     >
                         <CartesianGrid strokeDasharray="3 3"  vertical={false} />
-                        <XAxis dataKey="date" padding={{ left: 30, right: 30 }} angle={-45} textAnchor="end" height={60} tick={{stroke: 'white', strokeWidth: 0.8}} />
-                        <YAxis tick={{stroke: 'white', strokeWidth: 0.8}} />
+                        <XAxis dataKey="date" padding={{ left: 30, right: 30 }} angle={-45} textAnchor="end" height={60} tick={{fill: 'white'}} />
+                        <YAxis tick={{fill: 'white'}} />
                         <Tooltip content={<CustomTooltip />} />
                         <Legend verticalAlign="top" height={36} iconType='rect' iconSize={20} />
                         <Area type="monotone" dataKey="cases" stroke="#20b2aa" activeDot={{ r: 8 }} dot={false} strokeWidth={10} />

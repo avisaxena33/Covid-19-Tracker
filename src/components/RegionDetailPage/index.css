@@ -1,10 +1,3 @@
-body {
-  background-color: #282c34;
-  color: white;
-  font-family: Arial;
-  text-align: center;
-}
-
 .mainBody {
   display: flex;
   justify-content: space-between;
@@ -14,16 +7,6 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-}
-
-.loading {
-  display: flex;
-  justify-content: center;
-  align-items: center; 
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-  position: absolute;
 }
 
 .data__tables {

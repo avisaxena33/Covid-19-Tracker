@@ -3,6 +3,7 @@ import './index.css';
 import StatsTable from '../StatsTable';
 import TotalSidebar from '../TotalSidebar';
 import Navbar from "../Navbar";
+import MainLoading from "../MainLoading";
 import { fetchHomePageData } from '../../utils/mainApi';
 
 const Home = () => {
@@ -53,9 +54,7 @@ const Home = () => {
     if (isLoading) {
         return (
             <>
-                <div className="loading">
-                    <h1>Loading ...</h1>
-                </div>
+                <MainLoading />
             </>
         )
     }
@@ -69,15 +68,15 @@ const Home = () => {
                         <TotalSidebar />
                     </div>
                     <div className="data__tables">
-                        <StatsTable typeData={countriesResponse} totalData={globalResponse} title='World Statistics' denominationType='Country' />
-                        <StatsTable typeData={usaStatesResponse} totalData={usaResponse} title='United States Statistics'  denominationType='State' regionType='Country' regionIsoCode='USA' regionName='United States' />
-                        <StatsTable typeData={canadaProvincesResponse} totalData={canadaResponse} title='Canada Statistics' denominationType='Province' regionType='Country' regionIsoCode='CAN' regionName='Canada' />
-                        <StatsTable typeData={northAmericaCountriesResponse} totalData={northAmericaResponse} title='North America Statistics' denominationType='Country' regionType='Continent' regionIsoCode='North America' regionName='North America' />
-                        <StatsTable typeData={europeCountriesResponse} totalData={europeResponse} title='Europe Statistics' denominationType='Country' regionType='Continent' regionIsoCode='Europe' regionName='Europe' />
-                        <StatsTable typeData={asiaCountriesResponse} totalData={asiaResponse} title='Asia Statistics' denominationType='Country' regionType='Continent' regionIsoCode='Asia' regionName='Asia' />
-                        <StatsTable typeData={oceaniaCountriesResponse} totalData={oceaniaResponse} title='Oceania Statistics' denominationType='Country' regionType='Continent' regionIsoCode='Oceania' regionName='Oceania' />
-                        <StatsTable typeData={africaCountriesResponse} totalData={africaResponse} title='Africa Statistics' denominationType='Country' regionType='Continent' regionIsoCode='Africa' regionName='Africa' />
-                        <StatsTable typeData={southAmericaCountriesResponse} totalData={southAmericaResponse} title='South America Statistics' denominationType='Country' regionType='Continent' regionIsoCode='South America' regionName='South America' />
+                        <StatsTable typeData={countriesResponse} totalData={globalResponse} title='World Statistics' denominationType='Country' regionOrArea = 'Area' />
+                        <StatsTable typeData={usaStatesResponse} totalData={usaResponse} title='United States Statistics'  denominationType='State' type='Country' isoCode='USA' name='United States' regionOrArea = 'Area' />
+                        <StatsTable typeData={canadaProvincesResponse} totalData={canadaResponse} title='Canada Statistics' denominationType='Province' type='Country' isoCode='CAN' name='Canada' regionOrArea = 'Area' />
+                        <StatsTable typeData={northAmericaCountriesResponse} totalData={northAmericaResponse} title='North America Statistics' denominationType='Country' type='Continent' isoCode='North America' name='North America' regionOrArea = 'Area' />
+                        <StatsTable typeData={europeCountriesResponse} totalData={europeResponse} title='Europe Statistics' denominationType='Country' type='Continent' isoCode='Europe' name='Europe' regionOrArea = 'Area' />
+                        <StatsTable typeData={asiaCountriesResponse} totalData={asiaResponse} title='Asia Statistics' denominationType='Country' type='Continent' isoCode='Asia' name='Asia' regionOrArea = 'Area' />
+                        <StatsTable typeData={oceaniaCountriesResponse} totalData={oceaniaResponse} title='Oceania Statistics' denominationType='Country' type='Continent' isoCode='Oceania' name='Oceania' regionOrArea = 'Area' />
+                        <StatsTable typeData={africaCountriesResponse} totalData={africaResponse} title='Africa Statistics' denominationType='Country' type='Continent' isoCode='Africa' name='Africa' regionOrArea = 'Area' />
+                        <StatsTable typeData={southAmericaCountriesResponse} totalData={southAmericaResponse} title='South America Statistics' denominationType='Country' type='Continent' isoCode='South America' name='South America' regionOrArea = 'Area' />
                     </div>
                 </div>
             </div>
