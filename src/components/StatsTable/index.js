@@ -8,7 +8,10 @@ const StatsTable = ({ typeData, totalData, title, denominationType, regionName, 
     let history = useHistory();
 
     const navigateToArea = async(data, name) => {
-        const regName = regionName || data.continent;
+        let regName = regionName || data.continent;
+        if (regName === 'Australia/Oceania') {
+            regName = 'Oceania';
+        }
         const areaUrl = fetchRouteUrl(name, denominationType, regName, regionOrArea);
         history.push(areaUrl);
     }

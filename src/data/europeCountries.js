@@ -50,7 +50,7 @@ const europeCountries = [
       "alpha3Code": "CYP"
     },
     {
-      "name": "Czech Republic",
+      "name": "Czechia",
       "alpha2Code": "CZ",
       "alpha3Code": "CZE"
     },
@@ -100,7 +100,7 @@ const europeCountries = [
       "alpha3Code": "GGY"
     },
     {
-      "name": "Holy See",
+      "name": "Holy See (Vatican City State)",
       "alpha2Code": "VA",
       "alpha3Code": "VAT"
     },
@@ -155,7 +155,7 @@ const europeCountries = [
       "alpha3Code": "LUX"
     },
     {
-      "name": "Macedonia (the former Yugoslav Republic of)",
+      "name": "Macedonia",
       "alpha2Code": "MK",
       "alpha3Code": "MKD"
     },
@@ -165,7 +165,7 @@ const europeCountries = [
       "alpha3Code": "MLT"
     },
     {
-      "name": "Moldova (Republic of)",
+      "name": "Moldova",
       "alpha2Code": "MD",
       "alpha3Code": "MDA"
     },
@@ -210,7 +210,7 @@ const europeCountries = [
       "alpha3Code": "ROU"
     },
     {
-      "name": "Russian Federation",
+      "name": "Russia",
       "alpha2Code": "RU",
       "alpha3Code": "RUS"
     },
@@ -260,7 +260,7 @@ const europeCountries = [
       "alpha3Code": "UKR"
     },
     {
-      "name": "United Kingdom of Great Britain and Northern Ireland",
+      "name": "UK",
       "alpha2Code": "GB",
       "alpha3Code": "GBR"
     }

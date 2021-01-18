@@ -45,7 +45,7 @@ const northAmericaCountries = [
       "alpha3Code": "UMI"
     },
     {
-      "name": "Virgin Islands (British)",
+      "name": "British Virgin Islands",
       "alpha2Code": "VG",
       "alpha3Code": "VGB"
     },
@@ -160,7 +160,7 @@ const northAmericaCountries = [
       "alpha3Code": "PRI"
     },
     {
-      "name": "Saint Barth\u00e9lemy",
+      "name": "St. Barth",
       "alpha2Code": "BL",
       "alpha3Code": "BLM"
     },
@@ -175,12 +175,12 @@ const northAmericaCountries = [
       "alpha3Code": "LCA"
     },
     {
-      "name": "Saint Martin (French part)",
+      "name": "Saint Martin",
       "alpha2Code": "MF",
       "alpha3Code": "MAF"
     },
     {
-      "name": "Saint Pierre and Miquelon",
+      "name": "Saint Pierre Miquelon",
       "alpha2Code": "PM",
       "alpha3Code": "SPM"
     },
@@ -190,7 +190,7 @@ const northAmericaCountries = [
       "alpha3Code": "VCT"
     },
     {
-      "name": "Sint Maarten (Dutch part)",
+      "name": "Sint Maarten",
       "alpha2Code": "SX",
       "alpha3Code": "SXM"
     },
@@ -205,7 +205,7 @@ const northAmericaCountries = [
       "alpha3Code": "TCA"
     },
     {
-      "name": "United States of America",
+      "name": "USA",
       "alpha2Code": "US",
       "alpha3Code": "USA"
     }

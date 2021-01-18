@@ -48,7 +48,7 @@ const canadianProvinces = [
         "code": "SK"
     },
     {
-        "name": "Yukon Territory",
+        "name": "Yukon",
         "code": "YT"
     }
 ]

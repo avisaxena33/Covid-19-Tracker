@@ -30,7 +30,7 @@ const asiaCountries = [
       "alpha3Code": "BTN"
     },
     {
-      "name": "Brunei Darussalam",
+      "name": "Brunei",
       "alpha2Code": "BN",
       "alpha3Code": "BRN"
     },
@@ -65,7 +65,7 @@ const asiaCountries = [
       "alpha3Code": "IDN"
     },
     {
-      "name": "Iran (Islamic Republic of)",
+      "name": "Iran",
       "alpha2Code": "IR",
       "alpha3Code": "IRN"
     },
@@ -160,7 +160,7 @@ const asiaCountries = [
       "alpha3Code": "PAK"
     },
     {
-      "name": "Palestine, State of",
+      "name": "Palestine",
       "alpha2Code": "PS",
       "alpha3Code": "PSE"
     },
@@ -185,7 +185,7 @@ const asiaCountries = [
       "alpha3Code": "SGP"
     },
     {
-      "name": "Korea (Republic of)",
+      "name": "S. Korea",
       "alpha2Code": "KR",
       "alpha3Code": "KOR"
     },
@@ -230,7 +230,7 @@ const asiaCountries = [
       "alpha3Code": "TKM"
     },
     {
-      "name": "United Arab Emirates",
+      "name": "UAE",
       "alpha2Code": "AE",
       "alpha3Code": "ARE"
     },
@@ -240,7 +240,7 @@ const asiaCountries = [
       "alpha3Code": "UZB"
     },
     {
-      "name": "Viet Nam",
+      "name": "Vietnam",
       "alpha2Code": "VN",
       "alpha3Code": "VNM"
     },

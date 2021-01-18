@@ -59,6 +59,7 @@ const fetchCountryUrl = (regionName, name) => {
             });
             break;
         case 'Oceania':
+            console.log(name, regionName);
             oceaniaCountries.forEach((country) => {
                 if (country.name === name) {
                     returnUrl = `${country.alpha3Code}/${country.name}`;

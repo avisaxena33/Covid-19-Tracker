@@ -5,7 +5,7 @@ const southAmericaCountries = [
       "alpha3Code": "ARG"
     },
     {
-      "name": "Bolivia (Plurinational State of)",
+      "name": "Bolivia",
       "alpha2Code": "BO",
       "alpha3Code": "BOL"
     },
@@ -70,7 +70,7 @@ const southAmericaCountries = [
       "alpha3Code": "URY"
     },
     {
-      "name": "Venezuela (Bolivarian Republic of)",
+      "name": "Venezuela",
       "alpha2Code": "VE",
       "alpha3Code": "VEN"
     }

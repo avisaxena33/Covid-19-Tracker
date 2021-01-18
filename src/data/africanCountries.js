@@ -65,7 +65,7 @@ const africanCountries = [
       "alpha3Code": "COG"
     },
     {
-      "name": "Congo (Democratic Republic of the)",
+      "name": "DRC",
       "alpha2Code": "CD",
       "alpha3Code": "COD"
     },
@@ -125,7 +125,7 @@ const africanCountries = [
       "alpha3Code": "GNB"
     },
     {
-      "name": "Ivory Coast",
+      "name": "Côte d'Ivoire",
       "alpha2Code": "CI",
       "alpha3Code": "CIV"
     },
@@ -265,7 +265,7 @@ const africanCountries = [
       "alpha3Code": "SWZ"
     },
     {
-      "name": "Tanzania, United Republic of",
+      "name": "Tanzania",
       "alpha2Code": "TZ",
       "alpha3Code": "TZA"
     },

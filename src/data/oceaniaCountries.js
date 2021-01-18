@@ -50,7 +50,7 @@ const oceaniaCountries = [
       "alpha3Code": "MHL"
     },
     {
-      "name": "Micronesia (Federated States of)",
+      "name": "Micronesia",
       "alpha2Code": "FM",
       "alpha3Code": "FSM"
     },
