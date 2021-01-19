@@ -133,7 +133,7 @@ table tr:last-child td:last-child {
     font-size: 16px;
 }
 
-.swag:hover {
+.navigateToArea:hover {
   color: red;
   cursor:pointer;
 }

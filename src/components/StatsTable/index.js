@@ -74,10 +74,10 @@ const StatsTable = ({ typeData, totalData, title, denominationType, regionName, 
                         {typeData && typeData.map((type, index) => {
                             return (
                                 <React.Fragment key={index}>
-                                    <tr>
+                                    <tr className="navigateToArea" onClick={() => navigateToArea(type, type.name || type.state || type.province)}>
                                         <td className="flag__container">
                                             {type.countryInfo && type.countryInfo.flag && <img src={type.countryInfo.flag} className="flag" alt="hello"></img>}
-                                            <h3 className="swag" onClick={() => navigateToArea(type, type.name || type.state || type.province)}>{type.name || type.state || type.province}</h3>
+                                            <h3 className="swag">{type.name || type.state || type.province}</h3>
                                         </td>
                                         <td className="caseRow">{type.cases || type.cases === 0 ? numberWithCommas(type.cases) : 'Unknown'}</td>
                                         <td className="caseRow">{type.todayCases || type.todayCases === 0  ? numberWithCommas(type.todayCases) : 'Unknown'}</td>
