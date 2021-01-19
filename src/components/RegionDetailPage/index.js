@@ -9,12 +9,7 @@ import Navbar from "../Navbar";
 import { 
     fetchUsaPageData, 
     fetchCanadaPageData,
-    fetchNorthAmericaPageData, 
-    fetchEuropePageData, 
-    fetchAsiaPageData, 
-    fetchOceaniaPageData, 
-    fetchSouthAmericaPageData, 
-    fetchAfricaPageData 
+    fetchContinentPageData
 } from '../../utils/mainApi';
 import { 
     fetchCountryPageData, 
@@ -44,28 +39,13 @@ const RegionDetailPage = () => {
                     await fetchCanadaPageData(setTypeResponse, setTotalResponse, setHistoricalResponse);
                     break;
                 case 'North America':
-                    setDenominationType('Country');
-                    await fetchNorthAmericaPageData(setTypeResponse, setTotalResponse, setHistoricalResponse);
-                    break;
                 case 'Europe':
-                    setDenominationType('Country');
-                    await fetchEuropePageData(setTypeResponse, setTotalResponse, setHistoricalResponse);
-                    break;
                 case 'Asia':
-                    setDenominationType('Country');
-                    await fetchAsiaPageData(setTypeResponse, setTotalResponse, setHistoricalResponse);
-                    break;
                 case 'Oceania':
-                    setDenominationType('Country');
-                    await fetchOceaniaPageData(setTypeResponse, setTotalResponse, setHistoricalResponse);
-                    break;
                 case 'Africa':
-                    setDenominationType('Country');
-                    await fetchAfricaPageData(setTypeResponse, setTotalResponse, setHistoricalResponse);
-                    break;
                 case 'South America':
                     setDenominationType('Country');
-                    await fetchSouthAmericaPageData(setTypeResponse, setTotalResponse, setHistoricalResponse);
+                    await fetchContinentPageData(name, setTypeResponse, setTotalResponse, setHistoricalResponse);
                     break;
                 default:
                     break;

@@ -59,7 +59,6 @@ const fetchCountryUrl = (regionName, name) => {
             });
             break;
         case 'Oceania':
-            console.log(name, regionName);
             oceaniaCountries.forEach((country) => {
                 if (country.name === name) {
                     returnUrl = `${country.alpha3Code}/${country.name}`;
@@ -106,6 +105,36 @@ export const fetchRouteUrl = (name, denominationType, regionName, regionOrArea) 
             break;
     }
     return finalUrl;
+}
+
+/*
+    Matches continent name to correct array of countries
+*/
+export const matchContinentArray = async(continent) => {
+    let continentArrayReference;
+    switch (continent) {
+        case 'North America':
+            continentArrayReference = northAmericaCountries;
+            break;
+        case 'Europe':
+            continentArrayReference = europeCountries;
+            break;
+        case 'Asia':
+            continentArrayReference = asiaCountries;
+            break;
+        case 'Africa':
+            continentArrayReference = africaCountries;
+            break;
+        case 'Oceania':
+            continentArrayReference = oceaniaCountries;
+            break;
+        case 'South America':
+            continentArrayReference = southAmericaCountries;
+            break;
+        default:
+            break;
+    }
+    return continentArrayReference;
 }
 
 
