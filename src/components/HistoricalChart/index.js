@@ -5,7 +5,7 @@ import { ResponsiveContainer, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Area
 const HistoricalChart = ({ data }) => {
 
     const [chartData, setChartData] = useState([]);
-    const title = 'Cases/Deaths/Recovered';
+    const title = 'Historical Data';
 
     useEffect (() => {
         const formatData = () => {

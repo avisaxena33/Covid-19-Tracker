@@ -26,6 +26,8 @@ const RegionDetailPage = () => {
     const [totalResponse, setTotalResponse] = useState({});
     const [historicalResponse, setHistoricalResponse] = useState({});
     const [isLoading, setIsLoading] = useState(true);
+    const [isError, setIsError] = useState(false);
+    const [errorMessage, setErrorMessage] = useState('');
 
     const fetchCorrectData = async() => {
         if (regionOrArea === 'Region') {
@@ -75,8 +77,15 @@ const RegionDetailPage = () => {
             setIsLoading(true);
         }
         const fetchAllData = async() => {
-            await fetchCorrectData();            
-            setIsLoading(false);
+            try {
+                await fetchCorrectData();
+                setIsError(false);
+                setErrorMessage('');            
+                setIsLoading(false);
+            } catch (error) {
+                setIsError(true);
+                setErrorMessage(error);
+            }
         }
         resetState();
         fetchAllData();
@@ -85,7 +94,13 @@ const RegionDetailPage = () => {
     if (isLoading) {
         return (
             <>
-                <MainLoading />
+                <MainLoading message='Loading ...' />
+            </>
+        )
+    } else if (isError) {
+        return (
+            <>
+                <MainLoading message='Error retrieving data, please refresh the home page ...'/>
             </>
         )
     }

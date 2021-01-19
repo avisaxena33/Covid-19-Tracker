@@ -1,11 +1,11 @@
 import React from 'react';
 import './index.css';
 
-const MainLoading = () => {
+const MainLoading = ({ message }) => {
     return (
         <>
             <div className="mainLoading">
-                <h1>Loading ...</h1>
+                <h1>{message}</h1>
             </div>
         </>
     )

@@ -28,6 +28,8 @@ const Home = () => {
     const [southAmericaCountriesResponse, setSouthAmericaCountriesResponse] = useState([]);
 
     const [isLoading, setIsLoading] = useState(true);
+    const [isError, setIsError] = useState(false);
+    const [errorMessage, setErrorMessage] = useState('');
 
     const fetchAllData = async() => {
         try {
@@ -41,9 +43,12 @@ const Home = () => {
                 setOceaniaResponse, setOceaniaCountriesResponse, 
                 setAfricaResponse, setAfricaCountriesResponse, 
                 setSouthAmericaResponse, setSouthAmericaCountriesResponse);
+            setIsError(false);
+            setErrorMessage('');
             setIsLoading(false);
         } catch (error) {
-            console.log(error);
+            setIsError(true);
+            setErrorMessage(error);
         }
     }
 
@@ -54,7 +59,13 @@ const Home = () => {
     if (isLoading) {
         return (
             <>
-                <MainLoading />
+                <MainLoading message='Loading ...'/>
+            </>
+        )
+    } else if (isError) {
+        return (
+            <>
+                <MainLoading message='Error retrieving data, please refresh the home page ...'/>
             </>
         )
     }
