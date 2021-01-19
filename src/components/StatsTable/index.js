@@ -38,12 +38,12 @@ const StatsTable = ({ typeData, totalData, title, denominationType, regionName, 
 
     return (
         <>
-            <div className="country__table">
+            <div className="dataTable">
                 <div className="top">
                     <h2 className="tableTitle">{title}</h2>
                     <input className="search" type="text" value={searchText} onChange={(e) => setSearchText(e.target.value)} placeholder="search here" />
                 </div>
-                <div className="country__table__scroll">
+                <div className="dataTableScroll">
                     <table id={title}>
                         <tr>
                             <th>{denominationType}</th>
@@ -60,16 +60,16 @@ const StatsTable = ({ typeData, totalData, title, denominationType, regionName, 
                         </tr>
                         <tr>
                             <td className="flag__container">TOTAL</td>
-                            <td className="cases__color">{numberWithCommas(totalData.cases)}</td>
-                            <td className="cases__color">{numberWithCommas(totalData.todayCases)}</td>
-                            <td className="cases__color">{numberWithCommas(totalData.casesPerOneMillion)}</td>
-                            <td className="death__color">{numberWithCommas(totalData.deaths)}</td>
-                            <td className="death__color">{numberWithCommas(totalData.todayDeaths)}</td>
-                            <td className="death__color">{numberWithCommas(totalData.deathsPerOneMillion)}</td>
-                            <td className="active__color">{numberWithCommas(totalData.active)}</td>
-                            <td className="active__color">{numberWithCommas(totalData.tests)}</td>
-                            <td className="recovered__color">{numberWithCommas(totalData.recovered)}</td>
-                            <td className="critical__color">{numberWithCommas(totalData.critical)}</td>
+                            <td className="caseRow">{numberWithCommas(totalData.cases)}</td>
+                            <td className="caseRow">{numberWithCommas(totalData.todayCases)}</td>
+                            <td className="caseRow">{numberWithCommas(totalData.casesPerOneMillion)}</td>
+                            <td className="deathRow">{numberWithCommas(totalData.deaths)}</td>
+                            <td className="deathRow">{numberWithCommas(totalData.todayDeaths)}</td>
+                            <td className="deathRow">{numberWithCommas(totalData.deathsPerOneMillion)}</td>
+                            <td className="activeRow">{numberWithCommas(totalData.active)}</td>
+                            <td className="activeRow">{numberWithCommas(totalData.tests)}</td>
+                            <td className="recoveredRow">{numberWithCommas(totalData.recovered)}</td>
+                            <td className="criticalRow">{numberWithCommas(totalData.critical)}</td>
                         </tr>
                         {typeData && typeData.map((type, index) => {
                             return (
@@ -79,16 +79,16 @@ const StatsTable = ({ typeData, totalData, title, denominationType, regionName, 
                                             {type.countryInfo && type.countryInfo.flag && <img src={type.countryInfo.flag} className="flag" alt="hello"></img>}
                                             <h3 className="swag" onClick={() => navigateToArea(type, type.name || type.state || type.province)}>{type.name || type.state || type.province}</h3>
                                         </td>
-                                        <td className="cases__color">{type.cases || type.cases === 0 ? numberWithCommas(type.cases) : 'Unknown'}</td>
-                                        <td className="cases__color">{type.todayCases || type.todayCases === 0  ? numberWithCommas(type.todayCases) : 'Unknown'}</td>
-                                        <td className="cases__color">{type.casesPerOneMillion || type.casesPerOneMillion === 0  ? numberWithCommas(type.casesPerOneMillion) : 'Unknown'}</td>
-                                        <td className="death__color">{type.deaths || type.deaths === 0 ? numberWithCommas(type.deaths) : 'Unknown'}</td>
-                                        <td className="death__color">{type.todayDeaths || type.todayDeaths === 0  ? numberWithCommas(type.todayDeaths) : 'Unknown'}</td>
-                                        <td className="death__color">{type.deathsPerOneMillion || type.deathsPerOneMillion === 0  ? numberWithCommas(type.deathsPerOneMillion) : 'Unknown'}</td>
-                                        <td className="active__color">{type.active || type.active === 0  ? numberWithCommas(type.active) : 'Unknown'}</td>
-                                        <td className="active__color">{type.tests || type.tests === 0  ? numberWithCommas(type.tests) : 'Unknown'}</td>
-                                        <td className="recovered__color">{type.recovered || type.recovered === 0  ? numberWithCommas(type.recovered) : 'Unknown'}</td>
-                                        <td className="critical__color">{type.critical || type.critical === 0  ? numberWithCommas(type.critical) : 'Unknown'}</td>
+                                        <td className="caseRow">{type.cases || type.cases === 0 ? numberWithCommas(type.cases) : 'Unknown'}</td>
+                                        <td className="caseRow">{type.todayCases || type.todayCases === 0  ? numberWithCommas(type.todayCases) : 'Unknown'}</td>
+                                        <td className="caseRow">{type.casesPerOneMillion || type.casesPerOneMillion === 0  ? numberWithCommas(type.casesPerOneMillion) : 'Unknown'}</td>
+                                        <td className="deathRow">{type.deaths || type.deaths === 0 ? numberWithCommas(type.deaths) : 'Unknown'}</td>
+                                        <td className="deathRow">{type.todayDeaths || type.todayDeaths === 0  ? numberWithCommas(type.todayDeaths) : 'Unknown'}</td>
+                                        <td className="deathRow">{type.deathsPerOneMillion || type.deathsPerOneMillion === 0  ? numberWithCommas(type.deathsPerOneMillion) : 'Unknown'}</td>
+                                        <td className="activeRow">{type.active || type.active === 0  ? numberWithCommas(type.active) : 'Unknown'}</td>
+                                        <td className="activeRow">{type.tests || type.tests === 0  ? numberWithCommas(type.tests) : 'Unknown'}</td>
+                                        <td className="recoveredRow">{type.recovered || type.recovered === 0  ? numberWithCommas(type.recovered) : 'Unknown'}</td>
+                                        <td className="criticalRow">{type.critical || type.critical === 0  ? numberWithCommas(type.critical) : 'Unknown'}</td>
                                     </tr>
                                 </React.Fragment>
                             )

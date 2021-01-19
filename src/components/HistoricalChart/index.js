@@ -55,11 +55,11 @@ const HistoricalChart = ({ data }) => {
 
     return (
         <>
-            <div className="country__table">
-                <div className="top">
-                    <h2 className="tableTitle">{title}</h2>
+            <div className="historicalChartContainer">
+                <div className="historicalChartTitleContainer">
+                    <h2 className="historicalChartTitle">{title}</h2>
                 </div>
-                <ResponsiveContainer width='95%' height={400}>
+                <ResponsiveContainer width='99%' height={400}>
                     <AreaChart
                         data={chartData}
                         margin={{
@@ -70,9 +70,9 @@ const HistoricalChart = ({ data }) => {
                         <XAxis dataKey="date" padding={{ left: 30, right: 30 }} angle={-45} textAnchor="end" height={60} tick={{fill: 'white'}} />
                         <YAxis tick={{fill: 'white'}} />
                         <Tooltip content={<CustomTooltip />} />
-                        <Legend verticalAlign="top" height={36} iconType='rect' iconSize={20} />
-                        <Area type="monotone" dataKey="cases" stroke="#20b2aa" activeDot={{ r: 8 }} dot={false} strokeWidth={10} />
-                        <Area type="monotone" dataKey="deaths" stroke="#FF0000" activeDot={{ r: 8 }} dot={false} strokeWidth={10} />
+                        <Legend verticalAlign="top" height={60} iconType='rect' iconSize={20} />
+                        <Area type="monotone" dataKey="cases" stroke="lightseagreen" activeDot={{ r: 8 }} dot={false} strokeWidth={10} />
+                        <Area type="monotone" dataKey="deaths" stroke="red" activeDot={{ r: 8 }} dot={false} strokeWidth={10} />
                         <Area type="monotone" dataKey="recovered" stroke=" #005AE7" activeDot={{ r: 8 }} dot={false} strokeWidth={10} />
                     </AreaChart>  
                 </ResponsiveContainer>

@@ -52,7 +52,7 @@ const TotalSidebar = () => {
                 <h2>Critical Cases</h2>
                 <h1 className="recoveredColor">{numberWithCommas(globalResponse.recovered)}</h1>
                 <h2>Recovered</h2>
-                <h1 className="recoveredColor">{numberWithCommas(globalResponse.tests)}</h1>
+                <h1 className="activeColor">{numberWithCommas(globalResponse.tests)}</h1>
                 <h2>Tests</h2>
                 {globalResponse.affectedCountries && <h1 className="countriesAffectedColor">{numberWithCommas(globalResponse.affectedCountries)}</h1>}
                 {globalResponse.affectedCountries && <h2>Countries Affected</h2>}

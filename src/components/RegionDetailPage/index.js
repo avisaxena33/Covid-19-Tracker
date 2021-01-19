@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from "react-router-dom";
-import './index.css';
+import '../Home/index.css';
 import StatsTable from '../StatsTable';
 import TotalSidebar from '../TotalSidebar';
 import HistoricalChart from '../HistoricalChart';
@@ -98,7 +98,7 @@ const RegionDetailPage = () => {
                     <div className="leftSidebar">
                         <TotalSidebar />
                     </div>
-                    <div className="data__tables">
+                    <div className="dataTables">
                         <StatsTable typeData={typeResponse} totalData={totalResponse} title={title} denominationType={denominationType} regionOrArea = 'Area' />
                         <HistoricalChart data={historicalResponse} />
                     </div>

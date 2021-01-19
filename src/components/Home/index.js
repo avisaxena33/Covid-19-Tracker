@@ -67,7 +67,7 @@ const Home = () => {
                     <div className="leftSidebar">
                         <TotalSidebar />
                     </div>
-                    <div className="data__tables">
+                    <div className="dataTables">
                         <StatsTable typeData={countriesResponse} totalData={globalResponse} title='World Statistics' denominationType='Country' regionOrArea = 'Area' />
                         <StatsTable typeData={usaStatesResponse} totalData={usaResponse} title='United States Statistics'  denominationType='State' type='Country' isoCode='USA' name='United States' regionOrArea = 'Area' />
                         <StatsTable typeData={canadaProvincesResponse} totalData={canadaResponse} title='Canada Statistics' denominationType='Province' type='Country' isoCode='CAN' name='Canada' regionOrArea = 'Area' />

@@ -1,9 +1,11 @@
 h2 {
     font-weight: bold;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  }
+}
   
-.country__table {
+.historicalChartContainer {
+    display: flex;
+    flex-direction: column;
     border-radius: 25px;
     background-color: #3d434e;
     margin: 25px 25px 0px 25px;
@@ -45,35 +47,11 @@ h2 {
 }
 
 
-.top {
+.historicalChartTitleContainer {
     display: flex;
     justify-content: space-between;
 }
 
-.tableTitle {
+.historicalChartTitle {
     margin-left: 15px;
 }
-  
-  .death__color {
-    color: red;
-  }
-  
-  .cases__color {
-    color: lightseagreen;
-  }
-  
-  .critical__color {
-      color: orange;
-  }
-  
-  .active__color {
-      color: yellow;
-  }
-  
-  .recovered__color {
-      color: #005AE7;
-  }
-  
-  .swag {
-      font-size: 16px;
-  }
