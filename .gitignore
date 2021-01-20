@@ -11,8 +11,8 @@
 # production
 /build
 
-# python env
-covidenv/
+# custom ignores
+/.firebase
 
 # misc
 .DS_Store
