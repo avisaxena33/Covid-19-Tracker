@@ -13,6 +13,8 @@
 
 # custom ignores
 /.firebase
+firebase.json
+.firebaserc
 
 # misc
 .DS_Store
