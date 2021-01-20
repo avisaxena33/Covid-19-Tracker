@@ -1,5 +1,4 @@
-# Covid-19 Statistics Dashboard
-
+# [Covid-19 Statistics Dashboard](https://cov2019.com/) 
 ## Made entirely using React.js, this is my introductory project after learning this awesome front end framework
 ## Dashboard features (latest)
 * Worldwide major Covid-19 statistics on a sidebar updated live
