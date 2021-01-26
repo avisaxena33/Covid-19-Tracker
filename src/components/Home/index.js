@@ -10,7 +10,7 @@ const Home = () => {
 
     const [countriesResponse, setCountriesResponse] = useState([]);
     const [globalResponse, setGlobalResponse] = useState({});
-    const [usaStatesResponse, setUsaStatesResponse] = useState({});
+    const [usaStatesResponse, setUsaStatesResponse] = useState([]);
     const [usaResponse, setUsaResponse] = useState({});
     const [canadaResponse, setCanadaResponse] = useState({});
     const [canadaProvincesResponse, setCanadaProvincesResponse] = useState([]);
